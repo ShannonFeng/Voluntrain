@@ -1,11 +1,12 @@
 {
   "name": "voluntrain",
   "version": "1.0.0",
+  "main": "server/server.ts",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server/server.ts",
     "start-server": "node server/server.ts",
-    "start-all": "concurrently --kill-others \"npm run start\" \"npm run start-server\"",
+    "start-all": "concurrently --kill-others \"ng serve\" \"npm run start-server\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
