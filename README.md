@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Some notes
 
-Run `npm run start` to start just the Angular client. Navigate to http://localhost:4200 and you'll see the default Angular app.
+Run `ng serve` to start just the Angular client. Navigate to http://localhost:4200 and you'll see the default Angular app.
 
-`npm run start-server` will start just the node.js server on http://localhost:8000. 
+`npm run start-server` will start just the node.js server on http://localhost:3000. 
 
 To start both the Angular client and the server at the same time, run `npm run start-all`.
 
