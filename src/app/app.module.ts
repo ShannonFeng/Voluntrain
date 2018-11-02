@@ -30,7 +30,7 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
     ReactiveFormsModule,
     HttpModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     UserService,

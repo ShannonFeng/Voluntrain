@@ -4,6 +4,7 @@ var MongoClient = require("mongodb").MongoClient;
 const app = express();
 
 app.use(express.static("dist/Voluntrain"));
+
 var uri = "mongodb://testuser:Voluntrain1@voluntrain-shard-00-00-owfie.mongodb.net:27017,voluntrain-shard-00-01-owfie.mongodb.net:27017,voluntrain-shard-00-02-owfie.mongodb.net:27017/test?ssl=true&replicaSet=Voluntrain-shard-0&authSource=admin&retryWrites=true";
 
 app.use(function(req, res, next) {
@@ -26,36 +27,6 @@ app.get('/', function (req, res) {
     res.send("Hello");
 })
 
-app.get('/test', function (req, res) {
-  MongoClient.connect(uri, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("Voluntrain");
-    dbo.collection("Events").findOne({}, function(err, result) {
-      if (err) throw err;
-      console.log(result);
-      res.send(result);
-      db.close();
-    });
-  });
-})
-
-app.get('/test/:eventName', function (req, res) {
-  console.log(req.params.eventName);
-  res.send("you are on the /test/eventname route")
-  MongoClient.connect(uri, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("Voluntrain");
-    /*
-    dbo.collection("Events").findOne({}, function(err, result) {
-      if (err) throw err;
-      console.log(result);
-      res.send(result);
-      db.close();
-    });
-    */
-  });
-})
-
 app.get('/createaccount/', function (req, res) {
 
   MongoClient.connect(uri, function(err, db) {
@@ -68,6 +39,33 @@ app.get('/createaccount/', function (req, res) {
       if (err) throw err;
       console.log(result);
       res.send(result);
+      db.close();
+    });
+  });
+})
+
+app.get('/login', function(req, res) {
+  
+  MongoClient.connect(uri, function(err, db) {
+    if (err) throw err;
+
+    var dbo = db.db("Voluntrain");
+
+    var query = {email: req.query.email, password: req.query.password};
+
+    dbo.collection("Users").findOne(query, function(err, result) {
+      if (err) {
+        console.log(err);
+        res.send("ERROR");
+      }
+      else if (result == null) {
+        console.log("User not found in database.");
+        res.send("ERROR");
+      }
+      else {
+        console.log(result);
+        res.json(result);
+      }
       db.close();
     });
   });

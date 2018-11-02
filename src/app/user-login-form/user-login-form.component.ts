@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-login-form',
@@ -14,32 +15,25 @@ export class UserLoginFormComponent {
 
   constructor(private formBuilder: FormBuilder, private http:HttpClient) {
     this.loginForm = formBuilder.group({
-      username: '',
+      email: '',
       password: ''
     });
   }
 
   submit() {
-    console.log("on submit function");
-    this.http.request("GET", "http://localhost:3000/test").subscribe(
+    const params = new HttpParams()
+      .set('email', this.loginForm.value.email)
+      .set('password', this.loginForm.value.password);
+
+    this.http.request("GET", "http://localhost:3000/login", {params}).subscribe(
       data => { 
-        console.log("here");
+        console.log("User credentials match.")
       },
       err => {
-        console.log("there was an error")
+        console.log("Failed to login.")
       },
-      () => console.log("done")
+      () => console.log("Successfully logged in.")
     );
-    
-    /*
-    //extract data
-    console.log(this.loginForm.value);
-    //const result: loginInfo = Object.assign({}, this.loginForm.value);
-    //result.username = Object.assign({}, result.)
-    //simple debug
-    window.alert('Welcome ' + this.loginForm.value.username + '!');
-    */
   }
-
 
 }
