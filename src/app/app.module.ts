@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -28,7 +29,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
     AppRoutingModule,
     ReactiveFormsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     UserService,
