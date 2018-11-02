@@ -51,14 +51,15 @@ app.get('/login', function(req, res) {
 
     var dbo = db.db("Voluntrain");
 
-    var query = {email: req.query.email, password: req.query.password};
+    var query = { email: req.query.email, password: req.query.password };
 
-    dbo.collection("Users").findOne(query, function(err, result) {
+    dbo.collection("Users").find(query).toArray(function(err, result) {
       if (err) {
         console.log(err);
         res.send("ERROR");
       }
-      else if (result == null) {
+      // if no user found
+      else if (result.length == 0) {
         console.log("User not found in database.");
         res.send("ERROR");
       }

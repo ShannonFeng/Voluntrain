@@ -28,6 +28,8 @@ export class UserLoginFormComponent {
     this.http.request("GET", "http://localhost:3000/login", {params}).subscribe(
       data => { 
         console.log("User credentials match.")
+        data = JSON.parse(JSON.stringify(data))
+        console.log(data[0].name);
       },
       err => {
         console.log("Failed to login.")
