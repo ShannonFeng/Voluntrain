@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
 
-## Some notes
+## Running the Web Application
 
 Run `ng serve` to start just the Angular client. Navigate to http://localhost:4200 and you'll see the default Angular app.
 
