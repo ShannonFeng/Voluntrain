@@ -34,8 +34,40 @@ app.get('/createaccount/', function (req, res) {
     var dbo = db.db("Voluntrain");
 
     var newUser = {name: req.query.name, email: req.query.email, zipcode: req.query.zipcode, password: req.query.password };
+    var query = { email: req.query.email};
 
-    dbo.collection("Users").insertOne(newUser , function(err, result) {
+    dbo.collection("Users").find(query, function(err, result) {
+      if (err) {
+        console.log(err);
+        res.send("ERROR");
+      }
+      // if no user found
+      else if (result.length != 0) {
+        console.log("Email already found in database.");
+        res.send("ERROR");
+      }
+      else {
+        dbo.collection("Users").insertOne(newUser , function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.send(result);
+        });
+      }
+      db.close();
+    });
+    
+  });
+})
+
+app.get('/org-form', function (req, res) {
+
+  MongoClient.connect(uri, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("Voluntrain");
+
+    var newOrg = {name: req.query.name, location: req.query.location, zipcode: req.query.zipcode, bio: req.query.bio };
+
+    dbo.collection("Users").insertOne(newOrg , function(err, result) {
       if (err) throw err;
       console.log(result);
       res.send(result);
