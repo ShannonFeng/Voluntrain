@@ -29,10 +29,10 @@ export class OrgFormComponent implements OnInit {
       .set('zipcode', this.orgform.value.zipcode)
       .set('bio', this.orgform.value.bio);
 
-    this.http.request("GET", "http://localhost:3000/org-form", {params}).subscribe(
+      console.log(params);
+    this.http.get("http://localhost:3000/org-form", {params}).subscribe(
       data => { 
-        data = JSON.parse(JSON.stringify(data))
-        console.log(data[0].name);
+        console.log("Done.");
       },
       err => {
         console.log("Failed to create organization.")
