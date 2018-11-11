@@ -5,6 +5,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
+const bcrypt = require('bcrypt'); 
+const saltRounds = 10;
+
 const uri = config.dbUri;
 const portNum = config.portNum;
 var db;
@@ -45,7 +48,6 @@ app.get('/createaccount/', function (req, res) {
     if (err) throw err;
     var dbo = db.db("Voluntrain");
 
-    var newUser = {name: req.query.name, email: req.query.email, zipcode: req.query.zipcode, password: req.query.password };
     var query = { email: req.query.email};
 
     dbo.collection("Users").find(query).limit(1).toArray(function(err, result) {
@@ -59,6 +61,10 @@ app.get('/createaccount/', function (req, res) {
         res.send("ERROR");
       }
       else {
+        let encryptedPassword = bcrypt.hashSync(req.query.password, saltRounds); 
+
+        var newUser = {name: req.query.name, email: req.query.email, zipcode: req.query.zipcode, password: encryptedPassword };
+        
         dbo.collection("Users").insertOne(newUser , function(err, result) {
           if (err) throw err;
           console.log(result);
@@ -105,8 +111,7 @@ app.post('/api/createOrg', (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     var query = { 
-      email: req.body.email, 
-      password: req.body.password 
+      email: req.body.email,
     };
 
     db.collection("Users").find(query).limit(1).toArray(function(err, result) {
@@ -120,14 +125,23 @@ app.post('/api/login', async (req, res) => {
         })
       }
       else {
-        console.log("Successfully logged user in.");
-        // Get information about the user from db result and store in session information
-        req.session.email = result[0].email;
-        req.session.save();
+        console.log(result)
+        if (bcrypt.compareSync(req.body.password, result[0]['password'])) {
+            console.log("Successfully logged user in.");
+            // Get information about the user from db result and store in session information
+            req.session.email = result[0].email;
+            req.session.save();
 
-        res.json({
-          success: true,
-        })
+            res.json({
+              success: true,
+            })
+        } else {
+            console.log("Incorrect password");
+            res.json({
+            success: false,
+            message: "Incorrect password"
+            })
+        }
       }
   })
 })
