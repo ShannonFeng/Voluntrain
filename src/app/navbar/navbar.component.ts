@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    
   }
  
   private changeLoginStatus(loggedIn: boolean) {
