@@ -1,3 +1,11 @@
-<h1>
-  Welcome to Voluntrain!
-</h1>
+<h1>Welcome to Voluntrain!</h1>
+
+<div *ngIf="!isLoggedIn">
+  <p>No user is currently logged in.</p>
+</div>
+
+<div *ngIf="isLoggedIn">
+  <p>Currently logged in user: {{ name }}</p>
+  <p>Email: {{ email }}</p>
+  <p>Zipcode: {{ zip }}</p>
+</div>

@@ -9,19 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
-import { UserComponent } from './user/user.component';
 import { UserService } from './user.service'
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginFormComponent,
-    UserComponent,
     NavbarComponent,
     HomeComponent,
     CreateaccountComponent,
@@ -37,7 +36,7 @@ import { OrgFormComponent } from './org-form/org-form.component';
     HttpClientModule,
   ],
   providers: [
-    UserService,
+    UserService, AuthService
   ],
   bootstrap: [AppComponent]
 })

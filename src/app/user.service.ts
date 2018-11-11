@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+interface userData {
+  isLoggedIn: boolean,
+  name: string
+  email: string,
+  zip: Number
+}
 
-import { User } from './user';
+interface logoutResult {
+  success: boolean
+}
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
 
-  private userUrl = 'api/user'
-  constructor(
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
+
+  getData() {
+    return this.http.get<userData>('/api/userdata');
+  }
+
+  logout() {
+    return this.http.post<logoutResult>("api/logout", {});
+  }
+
 }

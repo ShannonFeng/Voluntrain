@@ -4,9 +4,9 @@
   "main": "server/server.ts",
   "scripts": {
     "ng": "ng",
-    "start": "node server/server.ts",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "start-server": "node server/server.ts",
-    "start-all": "concurrently --kill-others \"ng serve\" \"npm run start-server\"",
+    "start-all": "concurrently --kill-others \"npm start\" \"npm run start-server\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "core-js": "^2.5.4",
+    "express-session": "^1.15.6",
     "mongodb": "^3.1.8",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
