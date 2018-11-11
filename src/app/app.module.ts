@@ -36,7 +36,7 @@ import { AuthService } from './auth.service';
     HttpClientModule,
   ],
   providers: [
-    UserService, AuthService
+    UserService, AuthService, NavbarComponent
   ],
   bootstrap: [AppComponent]
 })

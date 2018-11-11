@@ -8,10 +8,6 @@ interface userData {
   zip: Number
 }
 
-interface logoutResult {
-  success: boolean
-}
-
 @Injectable()
 export class UserService {
 
@@ -19,10 +15,6 @@ export class UserService {
 
   getData() {
     return this.http.get<userData>('/api/userdata');
-  }
-
-  logout() {
-    return this.http.post<logoutResult>("api/logout", {});
   }
 
 }

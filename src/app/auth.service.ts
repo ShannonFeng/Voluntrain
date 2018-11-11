@@ -1,6 +1,6 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Output } from '@angular/core'
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 interface loginResult {
   success: boolean,
@@ -12,30 +12,34 @@ interface createOrgResult {
   message: string
 }
 
+interface logoutResult {
+  success: boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // may delete later
-  @Output() getLoginStatus: EventEmitter<boolean> = new EventEmitter();
-
-  private loggedInStatus = false;
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   constructor(private http:HttpClient) { }
 
   setLoggedIn(value: boolean) {
-    this.loggedInStatus = value;
-    this.getLoginStatus.emit(value);
+    this.loggedIn.next(value);
   }
 
   get isLoggedIn() {
-    return this.loggedInStatus;
+    return this.loggedIn.asObservable(); // {2}
   }
 
-  logUserIn(email, password) {
+  login(email, password) {
     // post login credentials to API server and return user info if correct
     return this.http.post<loginResult>("/api/login", {email, password});
+  }
+
+  logout() {
+    return this.http.post<logoutResult>("api/logout", {});
   }
 
   createOrg(name, location, zip, bio) {
