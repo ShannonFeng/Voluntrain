@@ -45,5 +45,4 @@ export class AuthService {
   createOrg(name, location, zip, bio) {
     return this.http.post<createOrgResult>("/api/createOrg", {name, location, zip, bio});
   }
-
 }
