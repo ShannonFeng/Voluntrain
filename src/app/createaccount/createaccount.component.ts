@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { HttpParams } from "@angular/common/http";
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createaccount',
@@ -13,7 +13,7 @@ export class CreateaccountComponent implements OnInit {
 
   ngOnInit() {}
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) {
+  constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router) {
     this.signupForm = formBuilder.group({
       name: '',
       email: '',
@@ -23,29 +23,18 @@ export class CreateaccountComponent implements OnInit {
   }
 
   submit() {
-    console.log("On signup")
+    var name = this.signupForm.value.name;
+    var email = this.signupForm.value.email;
+    var zipcode = this.signupForm.value.zipcode;
+    var password = this.signupForm.value.password;
 
-    const params = new HttpParams()
-    .set('name', this.signupForm.value.name)
-    .set('email', this.signupForm.value.email)
-    .set('zipcode', this.signupForm.value.zipcode)
-    .set('password', this.signupForm.value.password);
-
-    this.http.get("http://localhost:3000/createaccount", {params}).subscribe (
-      data => { 
-        console.log("here");
-      },
-      err => {
-        console.log("there was an error")
-      },
-      () => console.log("done")
-    )
+    this.auth.createAccount(name, email, zipcode, password).subscribe(data => {
+      if (data.success) {
+        window.alert(data.message);   // notify user that account creation successful
+        this.router.navigate(['/']);  // redirect to home
+      } else {
+        window.alert(data.message);   // otherwise display error msg to user
+      }
+    });  
   }
-
-
-
-  
-
-
-
 }

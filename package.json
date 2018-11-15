@@ -9,6 +9,8 @@
     "start-all": "concurrently --kill-others \"npm start\" \"npm run start-server\"",
     "build": "ng build",
     "test": "mocha || true",
+    "test-cov": "istanbul cover _mocha",
+    "coverage": "node ./node_modules/.bin/istanbul",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -37,23 +39,33 @@
     "@angular/cli": "~7.0.2",
     "@angular/compiler-cli": "~7.0.0",
     "@angular/language-service": "~7.0.0",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "babel-plugin-istanbul": "^5.1.0",
     "chai": "^4.2.0",
     "codelyzer": "~4.5.0",
     "concurrently": "^4.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.0.0",
+    "karma": "^3.0.0",
     "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage": "^1.1.2",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-webpack": "^3.0.5",
     "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1"
+  },
+  "nyc":{
+    "sourceMap": false,
+    "instrument": false
   }
 }

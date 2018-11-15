@@ -2,6 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var config = require('./config.ts');
 var bcrypt = require('bcrypt');
 
+var saltRounds = 10;
 var connected;
 var db;
 
@@ -20,11 +21,37 @@ function connectToDb(callback) {
     }
 }
 
+// Inserts a new user into db
+module.exports.createNewUser = function(userInfo, callback) {
+    // encrypt the password before inserting into db
+    var typedPassword = userInfo.password;
+    this.encryptPassword(typedPassword, (result) => {
+        userInfo.password = result;
+    })
+    connectToDb(() => {
+        db.collection("Users").insertOne(userInfo, function(err, result) {
+            if (err) throw err;
+            callback();
+        });
+    })
+}
+
+// Deletes (only one instance of) the user with the specified email
+module.exports.deleteUser = function(email, callback) {
+    var query = { email: email };
+    connectToDb(() => {
+        db.collection("Users").deleteOne(query, (err, result) => {
+            if (err) throw err;
+            callback(result);
+        }) 
+    })
+}
+
 // Returns true if user exists, false otherwise
 module.exports.checkUserExists = function(email, callback) {
     var query = { email: email };
-    connectToDb(done => {
-        db.collection("Users").find(query).limit(1).toArray((err, result) => {
+    connectToDb(() => {
+        db.collection("Users").find(query).toArray((err, result) => {
             if (err) throw err;
             // if no user found
             else if (result.length == 0) {
@@ -37,7 +64,13 @@ module.exports.checkUserExists = function(email, callback) {
     });
 };
 
-// Returns true is passwords match, false otherwise
+// Encrypts the given password and returns the result to the callback function
+module.exports.encryptPassword = function(typedPassword, callback) {
+    let encryptedPassword = bcrypt.hashSync(typedPassword, saltRounds); 
+    callback(encryptedPassword);
+}
+
+// Returns true if passwords match, false otherwise
 module.exports.checkPasswordsMatch = function(typedPassword, actualPassword, callback) { 
     callback(bcrypt.compareSync(typedPassword, actualPassword));
 }
@@ -45,7 +78,7 @@ module.exports.checkPasswordsMatch = function(typedPassword, actualPassword, cal
 // Retrieves the (bcrypted) password of the user with the specified email
 module.exports.getUserPassword = function(email, callback) {
     var query = { email: email };
-    connectToDb(done => {
+    connectToDb(() => {
         db.collection("Users").find(query).limit(1).toArray((err, result) => {
             if (err) throw err;
             callback(result[0]['password']);
@@ -53,10 +86,10 @@ module.exports.getUserPassword = function(email, callback) {
     })
 }
 
-// Retrieves all the user's information (except password) and returns JSON object containing info
-module.exports.getAllUserInfo = function(email, callback) {
+// Retrieves the user's information (except password) and returns JSON object containing info
+module.exports.getUserInfo = function(email, callback) {
     var query = { email: email };
-    connectToDb(done => {
+    connectToDb(() => {
         db.collection("Users").find(query).limit(1).toArray((err, result) => {
             if (err) throw err;
             var info = {
@@ -72,7 +105,7 @@ module.exports.getAllUserInfo = function(email, callback) {
 // Returns true if organization exists, false otherwise
 module.exports.checkOrgExists = function(orgName, callback) {
     var query = { name: orgName };
-    connectToDb(done => {
+    connectToDb(() => {
         db.collection("Organizations").find(query).limit(1).toArray(function(err, result) {
             if (err) throw err;
             // if duplicate org name found
@@ -88,7 +121,7 @@ module.exports.checkOrgExists = function(orgName, callback) {
 
 // Inserts a new organization into db
 module.exports.createNewOrg = function(orgInfo, callback) {
-    connectToDb(done => {
+    connectToDb(() => {
         db.collection("Organizations").insertOne(orgInfo, function(err, result) {
             if (err) throw err;
             callback();
@@ -99,7 +132,7 @@ module.exports.createNewOrg = function(orgInfo, callback) {
 // Returns all information about the org with specified orgName
 module.exports.getOrgInfo = function(orgName, callback) {
     var query = { name: orgName };
-    connectToDb(done => {
+    connectToDb(() => {
         db.collection("Organizations").find(query).limit(1).toArray((err, result) => {
             if (err) throw err;
             callback(result[0]);
@@ -110,10 +143,10 @@ module.exports.getOrgInfo = function(orgName, callback) {
 // Deletes (only one instance of) the organization with the specified name
 module.exports.deleteOrg = function(orgName, callback) {
     var query = { name: orgName };
-    connectToDb(done => {
-        db.collection("Organizations").deleteOne(query).toArray((err, result) => {
+    connectToDb(() => {
+        db.collection("Organizations").deleteOne(query, (err, result) => {
             if (err) throw err;
-            callback(result[0]);
+            callback(result);
         }) 
     })
 }

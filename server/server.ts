@@ -1,16 +1,15 @@
-const queries = require('./queries.ts');
 var config = require('./config.ts');
-const express = require('express');
+var bcrypt = require('bcrypt');
 var MongoClient = require('mongodb').MongoClient;
+const queries = require('./queries.ts');
+const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
-var bcrypt = require('bcrypt'); 
-const saltRounds = 10;
-
 const uri = config.dbUri;
 const portNum = config.portNum;
+var saltRounds = 10;
 var db;
 
 app.use(express.static("dist/Voluntrain"));
@@ -39,39 +38,35 @@ MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
   console.log("Voluntrain server stated on localhost:"+portNum);
 });
 
-app.get('/createaccount/', function (req, res) {
-
-  MongoClient.connect(uri, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("Voluntrain");
-
-    var query = { email: req.query.email};
-
-    dbo.collection("Users").find(query).limit(1).toArray(function(err, result) {
-      if (err) {
-        console.log(err);
-        res.send("ERROR");
+app.post('/api/createAccount/', function (req, res) {
+  var email = req.body.email;
+  // First check if user email is not in db
+  queries.checkUserExists(email, (userExists) => {
+    // if user does not exist, create the account
+    if (!userExists) {
+      var newUserInfo = { 
+        name: req.body.name, 
+        email: req.body.email, 
+        zipcode: req.body.zipcode, 
+        password: req.body.password,
       }
-      // if no user found
-      else if (result.length > 0) {
-        console.log("Email already found in database.");
-        res.send("ERROR");
-      }
-      else {
-        let encryptedPassword = bcrypt.hashSync(req.query.password, saltRounds); 
-
-        var newUser = {name: req.query.name, email: req.query.email, zipcode: req.query.zipcode, password: encryptedPassword };
-        
-        dbo.collection("Users").insertOne(newUser , function(err, result) {
-          if (err) throw err;
-          console.log(result);
-          res.send(result);
+      queries.createNewUser(newUserInfo, () => {
+        console.log("Successfully added user to database.");
+        res.json({
+          success: true,
+          message: "Successfully created account."
         });
-      }
-      db.close();
-    });
-    
-  });
+      })
+    }
+    // Otherwise if user already exists, don't create account
+    else {
+      console.log("Unable to create account. User email already found in database.");
+      res.json({
+        success: false,
+        message: "Unable to create account. User email already found in database."
+      });
+    }
+  })
 })
 
 app.post('/api/createOrg', (req, res) => {
@@ -79,16 +74,15 @@ app.post('/api/createOrg', (req, res) => {
       name: req.body.name, 
       location: req.body.location, 
       zipcode: req.body.zipcode, 
-      bio: req.body.bio 
+      bio: req.body.bio,
+      admin: req.session.email
     }
-
     var orgName = req.body.name;
-
-    queries.checkOrgExists(orgName, function(orgExists) {
+    queries.checkOrgExists(orgName, (orgExists) => {
       // If organization does not exist, then create the org
       if (!orgExists) {
         // Insert the organization info into db
-        queries.createNewOrg(orgInfo, done => {
+        queries.createNewOrg(orgInfo, () => {
           console.log("Successfully added organization to database.");
           res.json({
             success: true,
@@ -110,7 +104,6 @@ app.post('/api/createOrg', (req, res) => {
 app.post('/api/login', (req, res) => {
   var email = req.body.email;
   var typedPassword = req.body.password;
-
   // First check if user email exists
   queries.checkUserExists(email, function(userExists) {
     if (userExists) {
@@ -118,18 +111,19 @@ app.post('/api/login', (req, res) => {
           // check if password correct
           queries.checkPasswordsMatch(typedPassword, actualPassword, function(match) {
             if (match) {
-                console.log("Successfully logged user in.");
+                console.log("Successfully logged in " +email);
                 req.session.email = email;
                 req.session.save();
                 res.json({
                   success: true,
+                  message: "Successfully logged user in."
                 })
             }
             else {
-                console.log("Incorrect password");
+                console.log("Unable to login: incorrect password.");
                 res.json({
                   success: false,
-                  message: "Incorrect password"
+                  message: "Unable to login: incorrect password."
                 })
             }
           })
@@ -137,10 +131,10 @@ app.post('/api/login', (req, res) => {
     }
     // Otherwise if user does not exist 
     else {
-      console.log("User email not found in database.");
+      console.log("Unable to login: user email not found in database.");
       res.json({
           success: false,
-          message: "User email not found in database."
+          message: "Unable to login: user email not found in database."
       })
     }
   });
@@ -152,12 +146,12 @@ app.get('/api/userdata', (req, res) => {
     // First check if users exists
     if (userExists) {
         // then get the user's information
-        queries.getAllUserInfo(email, function(result) {
+        queries.getUserInfo(email, function(result) {
             res.json({
               isLoggedIn: true,
               name: result.name,
               email: result.email,
-              zip: result.zipcode
+              zipcode: result.zipcode
             })
         })
     }

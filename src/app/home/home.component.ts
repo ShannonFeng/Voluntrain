@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   name: String = "";
   email: String = "";
-  zip: Number = 0;
+  zipcode: Number = 0;
 
   constructor(private user:UserService, private auth:AuthService) { }
 
@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
         this.isLoggedIn = true;
         this.name = data.name;
         this.email = data.email;
-        this.zip = data.zip;
+        this.zipcode = data.zipcode;
+        console.log(this.name + " is currently logged in.");
       } 
       else {
         this.auth.setLoggedIn(false);

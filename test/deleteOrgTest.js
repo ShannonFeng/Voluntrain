@@ -6,24 +6,23 @@ describe('deleteOrgTest', function() {
     var location;
     var zipcode;
     var bio;
-
-    var dummyOrgInfo;
-
-    // before test, create a dummy org
-    before(function() {
-        orgName = "TestOrg123";
+    var orgInfo;
+    // before test, create an org
+    before(function(done) {
+        orgName = "The deleteOrgTest Org";
         location = "123 ThisIsATest Street";
         zipcode = "12345";
         bio = "TestOrgBio";
-
-        dummyOrgInfo = { name: orgName, location: location, zipcode: zipcode, bio: bio };
-
-        queries.createNewOrg(dummyOrgInfo, (done) => { });
+        orgInfo = { name: orgName, location: location, zipcode: zipcode, bio: bio };
+        queries.createNewOrg(orgInfo, () => { 
+            done();
+        });
     })
-    it('should delete dummy org and make sure org no longer exists', function() {
-        queries.deleteOrg(orgName, (done) => {
+    it('should delete org and make sure org no longer exists', function(done) {
+        queries.deleteOrg(orgName, () => {
             queries.checkOrgExists(orgName, (orgExists) => {
                 assert.equal(orgExists, false);
+                done();
             })
         })
     })
