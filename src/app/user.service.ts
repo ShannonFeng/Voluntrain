@@ -5,11 +5,7 @@ interface userData {
   isLoggedIn: boolean,
   name: string
   email: string,
-  zip: Number
-}
-
-interface logoutResult {
-  success: boolean
+  zipcode: Number
 }
 
 @Injectable()
@@ -19,10 +15,6 @@ export class UserService {
 
   getData() {
     return this.http.get<userData>('/api/userdata');
-  }
-
-  logout() {
-    return this.http.post<logoutResult>("api/logout", {});
   }
 
 }

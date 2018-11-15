@@ -1,15 +1,15 @@
-const config = require('./config.ts');
+var config = require('./config.ts');
+var bcrypt = require('bcrypt');
+var MongoClient = require('mongodb').MongoClient;
+const queries = require('./queries.ts');
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
-const bcrypt = require('bcrypt'); 
-const saltRounds = 10;
-
 const uri = config.dbUri;
 const portNum = config.portNum;
+var saltRounds = 10;
 var db;
 
 app.use(express.static("dist/Voluntrain"));
@@ -38,134 +38,130 @@ MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
   console.log("Voluntrain server stated on localhost:"+portNum);
 });
 
-app.get('/api/test', function (req, res) {
-    res.send("The test route works.");
-})
-
-app.get('/createaccount/', function (req, res) {
-
-  MongoClient.connect(uri, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("Voluntrain");
-
-    var query = { email: req.query.email};
-
-    dbo.collection("Users").find(query).limit(1).toArray(function(err, result) {
-      if (err) {
-        console.log(err);
-        res.send("ERROR");
+app.post('/api/createAccount/', function (req, res) {
+  var email = req.body.email;
+  // First check if user email is not in db
+  queries.checkUserExists(email, (userExists) => {
+    // if user does not exist, create the account
+    if (!userExists) {
+      var newUserInfo = { 
+        name: req.body.name, 
+        email: req.body.email, 
+        zipcode: req.body.zipcode, 
+        password: req.body.password,
       }
-      // if no user found
-      else if (result.length > 0) {
-        console.log("Email already found in database.");
-        res.send("ERROR");
-      }
-      else {
-        let encryptedPassword = bcrypt.hashSync(req.query.password, saltRounds); 
-
-        var newUser = {name: req.query.name, email: req.query.email, zipcode: req.query.zipcode, password: encryptedPassword };
-        
-        dbo.collection("Users").insertOne(newUser , function(err, result) {
-          if (err) throw err;
-          console.log(result);
-          res.send(result);
+      queries.createNewUser(newUserInfo, () => {
+        console.log("Successfully added user to database.");
+        res.json({
+          success: true,
+          message: "Successfully created account."
         });
-      }
-      db.close();
-    });
-    
-  });
+      })
+    }
+    // Otherwise if user already exists, don't create account
+    else {
+      console.log("Unable to create account. User email already found in database.");
+      res.json({
+        success: false,
+        message: "Unable to create account. User email already found in database."
+      });
+    }
+  })
 })
 
 app.post('/api/createOrg', (req, res) => {
-    var newOrg = {
+    var orgInfo = {
       name: req.body.name, 
       location: req.body.location, 
       zipcode: req.body.zipcode, 
-      bio: req.body.bio 
+      bio: req.body.bio,
+      admin: req.session.email
     }
-    var query = {name: req.body.name};
-
-    db.collection("Organizations").find(query).limit(1).toArray(function(err, result) {
-      if (err) throw err;
-      // if duplicate org name found
-      else if (result.length > 0) {
+    var orgName = req.body.name;
+    queries.checkOrgExists(orgName, (orgExists) => {
+      // If organization does not exist, then create the org
+      if (!orgExists) {
+        // Insert the organization info into db
+        queries.createNewOrg(orgInfo, () => {
+          console.log("Successfully added organization to database.");
+          res.json({
+            success: true,
+            message: "Successfully created organization."
+          });
+        })
+      }
+      // Otherwise if org already exists, return error message
+      else {
         console.log("Organization already found in database.");
         res.json({
           success: false,
           message: "Unable to create organization. Organization name already exists."
         });
       }
-      else {
-        db.collection("Organizations").insertOne(newOrg , function(err, result) {
-          if (err) throw err;
-          console.log("Successfully added organization to database.");
-          res.json({
-            success: true,
-            message: "Successfully created organization."
-          });
-        });
-      }
     })
 })
 
-app.post('/api/login', async (req, res) => {
-    var query = { 
-      email: req.body.email,
-    };
-
-    db.collection("Users").find(query).limit(1).toArray(function(err, result) {
-      if (err) throw err;
-      // if no user found
-      else if (result.length == 0) {
-        console.log("User credentials not found in database.");
-        res.json({
-            success: false,
-            message: "User credentials not found in database."
-        })
-      }
-      else {
-        console.log(result)
-        if (bcrypt.compareSync(req.body.password, result[0]['password'])) {
-            console.log("Successfully logged user in.");
-            // Get information about the user from db result and store in session information
-            req.session.email = result[0].email;
-            req.session.save();
-
-            res.json({
-              success: true,
-            })
-        } else {
-            console.log("Incorrect password");
-            res.json({
-            success: false,
-            message: "Incorrect password"
-            })
-        }
-      }
-  })
+app.post('/api/login', (req, res) => {
+  var email = req.body.email;
+  var typedPassword = req.body.password;
+  // First check if user email exists
+  queries.checkUserExists(email, function(userExists) {
+    if (userExists) {
+      queries.getUserPassword(email, function(actualPassword) {
+          // check if password correct
+          queries.checkPasswordsMatch(typedPassword, actualPassword, function(match) {
+            if (match) {
+                console.log("Successfully logged in " +email);
+                req.session.email = email;
+                req.session.save();
+                res.json({
+                  success: true,
+                  message: "Successfully logged user in."
+                })
+            }
+            else {
+                console.log("Unable to login: incorrect password.");
+                res.json({
+                  success: false,
+                  message: "Unable to login: incorrect password."
+                })
+            }
+          })
+      })
+    }
+    // Otherwise if user does not exist 
+    else {
+      console.log("Unable to login: user email not found in database.");
+      res.json({
+          success: false,
+          message: "Unable to login: user email not found in database."
+      })
+    }
+  });
 })
 
 app.get('/api/userdata', (req, res) => {
-    var query = {email: req.session.email};
-    db.collection("Users").find(query).limit(1).toArray((err, result) => {
-      if (err) throw err;
-      // if no user found using session email info, then no user is currently logged in
-      if (result.length == 0) {
-        res.json({
-            isLoggedIn: false
+  var email = req.session.email;
+  queries.checkUserExists(email, function(userExists) {
+    // First check if users exists
+    if (userExists) {
+        // then get the user's information
+        queries.getUserInfo(email, function(result) {
+            res.json({
+              isLoggedIn: true,
+              name: result.name,
+              email: result.email,
+              zipcode: result.zipcode
+            })
         })
-      }
-      // otherwise return information about the currently logged in user 
-      else {
-        res.json({
-            isLoggedIn: true,
-            name: result[0].name,
-            email: result[0].email,
-            zip: result[0].zipcode
-        })
-      }
-    })
+    }
+    // Otherwise if no user exists, returns json message that no user is logged in
+    else {
+      res.json({
+        isLoggedIn: false
+      })
+    }
+  });
 })
 
 app.post('/api/logout', (req, res) => { 
