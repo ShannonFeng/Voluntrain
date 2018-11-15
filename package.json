@@ -8,7 +8,9 @@
     "start-server": "node server/server.ts",
     "start-all": "concurrently --kill-others \"npm start\" \"npm run start-server\"",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
+    "show-code-coverage": "http-server ./coverage",
+    "test-all": "concurrently --kill-others \"npm test\" \"npm run show-code-coverage\"",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -26,6 +28,7 @@
     "bcrypt": "^3.0.2",
     "core-js": "^2.5.4",
     "express-session": "^1.15.6",
+    "http-server": "^0.11.1",
     "mongodb": "^3.1.8",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
