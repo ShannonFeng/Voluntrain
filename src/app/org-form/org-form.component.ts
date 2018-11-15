@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '../auth.service';
+import { Router } from "@angular/router"
 
 @Component({
   selector: 'app-org-form',
@@ -10,8 +11,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class OrgFormComponent implements OnInit {
   orgform; 
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) {
-    this.orgform = formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private router:Router, private Auth: AuthService) {
+    this.orgform = this.formBuilder.group({
       name: '',
       location: '', 
       zipcode: '',
@@ -23,22 +24,17 @@ export class OrgFormComponent implements OnInit {
   }
 
   submit() {
-    const params = new HttpParams()
-      .set('name', this.orgform.value.name)
-      .set('location', this.orgform.value.location)
-      .set('zipcode', this.orgform.value.zipcode)
-      .set('bio', this.orgform.value.bio);
+    var name = this.orgform.value.name;
+    var location = this.orgform.value.location;
+    var zip = this.orgform.value.zipcode;
+    var bio = this.orgform.value.bio;
 
-      console.log(params);
-    this.http.get("http://localhost:3000/org-form", {params}).subscribe(
-      data => { 
-        console.log("Done.");
-      },
-      err => {
-        console.log("Failed to create organization.")
-      },
-      () => console.log("Successfully created organization.")
-    );
+    this.Auth.createOrg(name, location, zip, bio).subscribe(data => {
+      if (data.success) {
+        this.router.navigate(['/']);  // redirect to home
+      }
+      window.alert(data.message);
+    })
   }
 
 }

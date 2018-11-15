@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { toArray } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -13,29 +13,25 @@ export class UserLoginFormComponent {
 
   ngOnInit() {}
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) {
-    this.loginForm = formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private router:Router, private auth:AuthService) {
+    this.loginForm = this.formBuilder.group({
       email: '',
       password: ''
     });
   }
 
   submit() {
-    const params = new HttpParams()
-      .set('email', this.loginForm.value.email)
-      .set('password', this.loginForm.value.password);
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
 
-    this.http.request("GET", "http://localhost:3000/login", {params}).subscribe(
-      data => { 
-        console.log("User credentials match.")
-        data = JSON.parse(JSON.stringify(data))
-        console.log(data[0].name);
-      },
-      err => {
-        console.log("Failed to login.")
-      },
-      () => console.log("Successfully logged in.")
-    );
+    this.auth.logUserIn(email, password).subscribe(data => {
+      if (data.success) {
+        this.auth.setLoggedIn(true);
+        this.router.navigate(['/']);  // redirect to home on successful login
+      } else {
+        window.alert(data.message);   // otherwise display error msg to user
+      }
+    });
   }
 
 }
