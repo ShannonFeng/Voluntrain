@@ -2,9 +2,9 @@
     <ul>
     <li><a routerLink="/">Voluntrain</a></li>
     <li><input type="text" placeholder="Search..."></li>
-    <li *ngIf="loggedIn" style="float:right"><a routerLink="/logout">Sign Out</a></li>
-    <li *ngIf="!loggedIn" style="float:right"><a routerLink="/user-login-form">Sign In</a></li>
-    <li *ngIf="!loggedIn" style="float:right"><a routerLink="/createaccount">Create Account</a></li>
+    <li *ngIf="isLoggedIn$ | async" style="float:right"><a routerLink="/logout">Sign Out</a></li>
+    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/user-login-form">Sign In</a></li>
+    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/createaccount">Create Account</a></li>
     <li style="float:right"><a routerLink="/org-form">Create an Organization</a></li>
     </ul>
 </div>
