@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
+import { ViewEventComponent} from './view-event/view-event.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrgFormComponent } from './org-form/org-form.component';
     HomeComponent,
     CreateaccountComponent,
     LogoutComponent,
-    OrgFormComponent
+    OrgFormComponent,
+    ViewEventComponent
   ],
   imports: [
     BrowserModule,

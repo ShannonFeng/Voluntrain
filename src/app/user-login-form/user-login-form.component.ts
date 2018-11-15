@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { toArray } from 'rxjs/operators';
 
@@ -11,31 +11,43 @@ import { toArray } from 'rxjs/operators';
 export class UserLoginFormComponent {
   loginForm;   // will be used for FormGroup instance
 
-  ngOnInit() {}
+  constructor(
+    private formBuilder: FormBuilder
+  ){}
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) {
-    this.loginForm = formBuilder.group({
-      email: '',
-      password: ''
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])),
+      password: this.formBuilder.control('', Validators.required)
     });
+
+  }
+
+  get email(){
+    return this.loginForm.get('email')
   }
 
   submit() {
-    const params = new HttpParams()
-      .set('email', this.loginForm.value.email)
-      .set('password', this.loginForm.value.password);
+    console.log(this.loginForm.value);
 
-    this.http.request("GET", "http://localhost:3000/login", {params}).subscribe(
-      data => { 
-        console.log("User credentials match.")
-        data = JSON.parse(JSON.stringify(data))
-        console.log(data[0].name);
-      },
-      err => {
-        console.log("Failed to login.")
-      },
-      () => console.log("Successfully logged in.")
-    );
+    // const params = new HttpParams()
+    //   .set('email', this.loginForm.value.email)
+    //   .set('password', this.loginForm.value.password);
+    //
+    // this.http.request("GET", "http://localhost:3000/login", {params}).subscribe(
+    //   data => {
+    //     console.log("User credentials match.")
+    //     data = JSON.parse(JSON.stringify(data))
+    //     console.log(data[0].name);
+    //   },
+    //   err => {
+    //     console.log("Failed to login.")
+    //   },
+    //   () => console.log("Successfully logged in.")
+    // );
   }
 
 }
