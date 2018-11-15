@@ -14,6 +14,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { OrgFormComponent } from './org-form/org-form.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserService } from './user.service';
+import { ViewEventComponent } from './view-event/view-event.component';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -25,7 +27,8 @@ describe('AppComponent', () => {
         UserLoginFormComponent,
         CreateaccountComponent,
         OrgFormComponent,
-        LogoutComponent
+        LogoutComponent,
+        ViewEventComponent
       ],
       imports: [
         AppRoutingModule,
