@@ -18,7 +18,9 @@ export class CreateaccountComponent implements OnInit {
       name: '',
       email: '',
       zipcode: '',
-      password: ''
+      password: '',
+      description: '',  // aka "bio"
+      interests: ''
     });
   }
 
@@ -27,8 +29,10 @@ export class CreateaccountComponent implements OnInit {
     var email = this.signupForm.value.email;
     var zipcode = this.signupForm.value.zipcode;
     var password = this.signupForm.value.password;
+    var description = this.signupForm.value.description;
+    var interests = this.signupForm.value.description;
 
-    this.auth.createAccount(name, email, zipcode, password).subscribe(data => {
+    this.auth.createAccount(name, email, zipcode, password, description, interests).subscribe(data => {
       if (data.success) {
         window.alert(data.message);   // notify user that account creation successful
         this.router.navigate(['/']);  // redirect to home

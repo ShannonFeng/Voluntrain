@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 
-import { HomeComponent } from './home.component';
+import { NavbarComponent } from './navbar.component';
 
 import { testDeclarations } from '../test.declarations';
 import { testProviders } from '../test.providers';
 import { testImports } from '../test.imports';
 
-describe('HomeComponent', () => {
-    let component: HomeComponent;
-    let fixture: ComponentFixture<HomeComponent>;
+describe('NavbarComponent', () => {
+    let component: NavbarComponent;
+    let fixture: ComponentFixture<NavbarComponent>;
     let de: DebugElement;
 
     beforeEach(async() => {
         TestBed.configureTestingModule({
             declarations: [ 
-                HomeComponent,
+                NavbarComponent,
                 testDeclarations
             ],
             providers: [
@@ -29,19 +29,14 @@ describe('HomeComponent', () => {
     })
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(NavbarComponent);
         component = fixture.componentInstance;
         de = fixture.debugElement;
 
         fixture.detectChanges();
     })
 
-    it('should create the home component', () => {
+    it('should create the navbar component', () => {
         expect(component).toBeTruthy();
     })
-
-    it('should display the h1 tag with text "Welcome to Voluntrain!"', () => {
-        const compiled = de.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to Voluntrain!');
-    });
 })

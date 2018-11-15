@@ -16,9 +16,14 @@ describe('createNewUserTest', function() {
         // Create the new user
         queries.createNewUser(newUserInfo, () => { 
             // Make sure the new user was actually added to database
-            queries.checkUserExists(email, (result) => {
-                assert.equal(result, true);
-                done();
+            queries.checkUserExists(email, (userExists) => {
+                assert.equal(userExists, true);
+                queries.getUserInfo(email, (returnedUserInfo) => {
+                    assert.equal(returnedUserInfo.name, newUserInfo.name);
+                    assert.equal(returnedUserInfo.email, newUserInfo.email);
+                    assert.equal(returnedUserInfo.zipcode, newUserInfo.zipcode);
+                    done();
+                })
             })
         });
     })

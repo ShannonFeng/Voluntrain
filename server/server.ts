@@ -49,6 +49,8 @@ app.post('/api/createAccount/', function (req, res) {
         email: req.body.email, 
         zipcode: req.body.zipcode, 
         password: req.body.password,
+        description: req.body.description,
+        interests: req.body.interests
       }
       queries.createNewUser(newUserInfo, () => {
         console.log("Successfully added user to database.");

@@ -8,23 +8,25 @@ describe('createNewOrgTest', function() {
     var bio;
     var testOrgInfo;
 
-    // Before test, set up the test organization to be created
-    before(function() {
+    it('should successfully create a new organization with the specified info', function(done) {
         orgName = "The createNewOrgTest Org";
         location = "123 ThisIsATest Street";
         zipcode = "12345";
         bio = "TestOrgBio";
-
         testOrgInfo = { name: orgName, location: location, zipcode: zipcode, bio: bio };
-    })
-    it('should successfully create a new organization with the specified info', function(done) {
+        
         queries.createNewOrg(testOrgInfo, () => {
-            queries.getOrgInfo(orgName, (returnedOrgInfo) => {
-                assert.equal(returnedOrgInfo.name, testOrgInfo.name);
-                assert.equal(returnedOrgInfo.location, testOrgInfo.location);
-                assert.equal(returnedOrgInfo.zipcode, testOrgInfo.zipcode);
-                assert.equal(returnedOrgInfo.bio, testOrgInfo.bio);
-                done();
+            // After creating the org, make sure it now exists in db
+            queries.checkOrgExists(testOrgInfo.name, (orgExists) => {
+                assert.equal(orgExists, true);
+                // Then verify that the org's information is correct
+                queries.getOrgInfo(orgName, (returnedOrgInfo) => {
+                    assert.equal(returnedOrgInfo.name, testOrgInfo.name);
+                    assert.equal(returnedOrgInfo.location, testOrgInfo.location);
+                    assert.equal(returnedOrgInfo.zipcode, testOrgInfo.zipcode);
+                    assert.equal(returnedOrgInfo.bio, testOrgInfo.bio);
+                    done();
+                })
             })
         })
     })

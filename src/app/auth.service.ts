@@ -44,11 +44,12 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<logoutResult>("api/logout", {});
+    return this.http.post<logoutResult>("/api/logout", {});
   }
 
-  createAccount(name, email, zipcode, password) {
-    return this.http.post<createAccountResult>("/api/createAccount", {name, email, zipcode, password});
+  createAccount(name, email, zipcode, password, description, interests) {
+    var params = {name, email, zipcode, password, description, interests}; 
+    return this.http.post<createAccountResult>("/api/createAccount", params);
   }
 
   createOrg(name, location, zipcode, bio) {

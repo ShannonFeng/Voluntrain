@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 
-import { HomeComponent } from './home.component';
+import { UserLoginFormComponent } from './user-login-form.component';
 
 import { testDeclarations } from '../test.declarations';
 import { testProviders } from '../test.providers';
 import { testImports } from '../test.imports';
 
-describe('HomeComponent', () => {
-    let component: HomeComponent;
-    let fixture: ComponentFixture<HomeComponent>;
+describe('UserLoginFormComponent', () => {
+    let component: UserLoginFormComponent;
+    let fixture: ComponentFixture<UserLoginFormComponent>;
     let de: DebugElement;
 
     beforeEach(async() => {
         TestBed.configureTestingModule({
             declarations: [ 
-                HomeComponent,
+                UserLoginFormComponent,
                 testDeclarations
             ],
             providers: [
@@ -29,19 +29,14 @@ describe('HomeComponent', () => {
     })
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(UserLoginFormComponent);
         component = fixture.componentInstance;
         de = fixture.debugElement;
 
         fixture.detectChanges();
     })
 
-    it('should create the home component', () => {
+    it('should create the user-login-form component', () => {
         expect(component).toBeTruthy();
     })
-
-    it('should display the h1 tag with text "Welcome to Voluntrain!"', () => {
-        const compiled = de.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to Voluntrain!');
-    });
 })

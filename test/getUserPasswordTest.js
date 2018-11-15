@@ -23,6 +23,9 @@ describe('getUserPasswordTest', function() {
         queries.getUserPassword(email, (resultPassword) => {
             // Assert that a password is actually returned
             assert.isDefined(resultPassword);
+            // Note: resultPassword should be an encrypted password
+            // So resultPassword should NOT match original password
+            assert.notEqual(resultPassword, password);
             done();
         })
     })
