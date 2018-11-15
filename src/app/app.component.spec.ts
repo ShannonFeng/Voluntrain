@@ -1,12 +1,43 @@
 import { TestBed, async } from '@angular/core/testing';
+
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpModule } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { HomeComponent } from './home/home.component';
+import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { OrgFormComponent } from './org-form/org-form.component';
+import { LogoutComponent } from './logout/logout.component';
+import { UserService } from './user.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent,
+        HomeComponent,
+        UserLoginFormComponent,
+        CreateaccountComponent,
+        OrgFormComponent,
+        LogoutComponent
       ],
+      imports: [
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        HttpClientModule
+      ],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        UserService
+      ]
     }).compileComponents();
   }));
 
@@ -15,7 +46,8 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-
+  
+/*
   it(`should have as title 'angular-testing'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
@@ -28,4 +60,5 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-testing!');
   });
+  */
 });
