@@ -16,6 +16,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
 import { AuthService } from './auth.service';
+import { ViewEventComponent } from './view-event/view-event.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AuthService } from './auth.service';
     HomeComponent,
     CreateaccountComponent,
     LogoutComponent,
-    OrgFormComponent
+    OrgFormComponent,
+    ViewEventComponent
   ],
   imports: [
     BrowserModule,
