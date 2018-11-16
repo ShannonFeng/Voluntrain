@@ -3,27 +3,27 @@
     <form
     [formGroup]="signupForm"
     (ngSubmit)="submit()">
-        
+
         <div class = "form-control">
             <label for="name">Name</label>
             <input type="text" class = "form-group" id="name" name="firstname" placeholder="First Name Last Name" required formControlName="name">
         </div>
-        
+
         <div class = "form-control">
             <label for="email">Email</label>
             <input type="text" class = "form-group" id="email" name="email" placeholder="example@wisc.edu" required formControlName="email">
         </div>
-        
+
         <div class = "form-control">
             <label for="password">Password</label>
             <input type="text" class = "form-group" id="password" name="password" placeholder="" required formControlName="password">
         </div>
-        
+
         <div class = "form-control">
             <label for="zipcode">Zip Code</label>
             <input type="text" class = "form-group" id="zipcode" name="zipcode" placeholder="00000" required formControlName="zipcode">
         </div>
-    
-        <input type="submit" value="Create Account">
+
+        <button  type="submit" [disabled]="!signupForm.valid">Sign Up</button>
     </form>
 </div>
