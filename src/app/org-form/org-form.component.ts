@@ -26,10 +26,10 @@ export class OrgFormComponent implements OnInit {
   submit() {
     var name = this.orgform.value.name;
     var location = this.orgform.value.location;
-    var zip = this.orgform.value.zipcode;
+    var zipcode = this.orgform.value.zipcode;
     var bio = this.orgform.value.bio;
 
-    this.Auth.createOrg(name, location, zip, bio).subscribe(data => {
+    this.Auth.createOrg(name, location, zipcode, bio).subscribe(data => {
       if (data.success) {
         this.router.navigate(['/']);  // redirect to home
       }

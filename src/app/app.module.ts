@@ -39,7 +39,7 @@ import { ViewEventComponent } from './view-event/view-event.component';
     HttpClientModule,
   ],
   providers: [
-    UserService, AuthService
+    UserService, AuthService, NavbarComponent
   ],
   bootstrap: [AppComponent]
 })
