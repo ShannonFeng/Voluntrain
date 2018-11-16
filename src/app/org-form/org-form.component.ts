@@ -9,6 +9,9 @@ import { Router } from "@angular/router"
   styleUrls: ['./org-form.component.css']
 })
 export class OrgFormComponent implements OnInit {
+
+ngOnInit() { }
+
   orgform;
 
   constructor(private formBuilder: FormBuilder, private router:Router, private Auth: AuthService) {
@@ -18,19 +21,6 @@ export class OrgFormComponent implements OnInit {
       zipcode: '',
       bio: ''
     });
-  }
-
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) {
-    this.orgForm = formBuilder.group({
-      orgName: '',
-      address: '',
-      zipcode: '',
-      bio: ''
-    });
-  }
-
-  submit() {
-    //unimplemented
   }
 
   submit() {

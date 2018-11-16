@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 
@@ -12,9 +13,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class UserLoginFormComponent {
   loginForm;   // will be used for FormGroup instance
 
-  constructor(
-    private formBuilder: FormBuilder
-  ){}
+  constructor(private navbar:NavbarComponent, private router:Router, private formBuilder: FormBuilder, private auth:AuthService, private user:UserService) {
+
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

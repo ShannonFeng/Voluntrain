@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,9 @@ export class CreateaccountComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ])),
-      password: formBuilder.control('', Validators.required)
+      password: formBuilder.control('', Validators.required),
+      description: '',
+      interests: ''
     });
   }
 

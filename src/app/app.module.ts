@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
@@ -17,6 +18,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
 import { EventsComponent } from './events/events.component';
 import { EventService } from './event.service';
+import { CreateEventComponent } from './create-event/create-event.component';
+import { ViewEventComponent } from './view-event/view-event.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { EventService } from './event.service';
     LogoutComponent,
     OrgFormComponent,
     EventsComponent,
-    ViewEventComponent
+    ViewEventComponent,
+    CreateEventComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,8 @@ import { EventService } from './event.service';
   ],
   providers: [
     UserService,
-    EventService
+    EventService,
+    NavbarComponent
   ],
   bootstrap: [AppComponent]
 })

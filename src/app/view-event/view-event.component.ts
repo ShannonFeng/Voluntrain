@@ -15,10 +15,9 @@ import { UserService}    from '../user.service';
   templateUrl: './view-event.component.html',
   styleUrls: ['./view-event.component.css']
 })
-<<<<<<< HEAD
 
 export class ViewEventComponent implements OnInit {
-
+  event: Event;
   lat = 43.0746953;
   lng = -89.3841695;
   zoom = 14;
