@@ -43,7 +43,7 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
   providers: [
-    UserService, AuthService
+    UserService, AuthService, NavbarComponent
   ],
   bootstrap: [AppComponent]
 })
