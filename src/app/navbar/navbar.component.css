@@ -3,10 +3,11 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
     position: fixed;
     top: 0;
     width: 98%;
+    z-index: 9999;
+    background: rgba(29, 28, 28, 0.76);
 }
 
 li {

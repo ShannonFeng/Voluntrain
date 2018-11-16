@@ -7,6 +7,11 @@ interface loginResult {
   message: string
 }
 
+interface createAccountResult {
+  success: boolean,
+  message: string
+}
+
 interface createOrgResult {
   success: boolean,
   message: string
@@ -30,7 +35,7 @@ export class AuthService {
   }
 
   get isLoggedIn() {
-    return this.loggedIn.asObservable(); // {2}
+    return this.loggedIn.asObservable();
   }
 
   login(email, password) {
@@ -39,10 +44,15 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<logoutResult>("api/logout", {});
+    return this.http.post<logoutResult>("/api/logout", {});
   }
 
-  createOrg(name, location, zip, bio) {
-    return this.http.post<createOrgResult>("/api/createOrg", {name, location, zip, bio});
+  createAccount(name, email, zipcode, password, description, interests) {
+    var params = {name, email, zipcode, password, description, interests}; 
+    return this.http.post<createAccountResult>("/api/createAccount", params);
+  }
+
+  createOrg(name, location, zipcode, bio) {
+    return this.http.post<createOrgResult>("/api/createOrg", {name, location, zipcode, bio});
   }
 }
