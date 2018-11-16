@@ -3,22 +3,22 @@
     <form
     [formGroup]="signupForm"
     (ngSubmit)="submit()">
-        
+
         <div class = "required">
             <label for="name">Name</label>
             <input type="text" class = "required" id="name" name="firstname" placeholder="First Name Last Name" required formControlName="name">
         </div>
-        
+
         <div class = "required">
             <label for="email">Email</label>
             <input type="text" class = "required" id="email" name="email" placeholder="example@wisc.edu" required formControlName="email">
         </div>
-        
+
         <div class = "required">
             <label for="password">Password</label>
             <input type="password" class = "required" id="password" name="password" placeholder="" required formControlName="password">
         </div>
-        
+
         <div class = "required">
             <label for="zipcode">Zip Code</label>
             <input type="text" class = "required" id="zipcode" name="zipcode" placeholder="00000" required formControlName="zipcode">
@@ -28,7 +28,7 @@
             <label for="description">Description</label>
             <input rows="4" cols="100" type="text" class = "optional" id="description" name="description" placeholder="Optional description of yourself" formControlName="description">
         </div>
-    
+
         <div class = "optional">
             <label for="interests">Interests</label>
             <input type="text" class = "required" id="interests" name="interests" placeholder="Possible Interests" formControlName="interests">
@@ -36,9 +36,9 @@
 
         <div>
             <label for="fileupload"> Select a profile picture to upload</label>
-            <input type="file" name="fileupload" value="fileupload" id="fileupload"> 
+            <input type="file" name="fileupload" value="fileupload" id="fileupload">
         </div>
 
-        <input type="submit" value="Create Account">
+        <button  type="submit" [disabled]="!signupForm.valid">Sign Up</button>
     </form>
 </div>

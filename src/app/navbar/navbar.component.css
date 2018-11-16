@@ -3,6 +3,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-color: #4D9DEE;
     position: fixed;
     top: 0;
     width: 98%;
@@ -10,22 +11,34 @@ ul {
     background: rgba(29, 28, 28, 0.76);
 }
 
-li {
-    float: left;
-}
 
-li a {
+li.pagelink a{
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    float:right;
 }
 
-li a:hover {
-    background-color: #111;
-}
+li.icon a{
+    float:left;
+    display: block;
+    padding: 5px 15px;
+    text-decoration: none;
+    background-color: white;
 
+}
+li.icon a:hover {
+    background-color: #E0E0E0;
+}
+li.pagelink a:hover {
+    background-color: #FF007F;
+}
+li.search input{
+    padding: 16px 16px;
+    width: 30%;
+}
 input[type=text] {
     float: left;
     padding: 14px 16px;

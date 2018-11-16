@@ -19,22 +19,12 @@
 
 </div>
 
-<h1> Sign up</h1>
+<div *ngIf="event">
+  <h2>Event Details</h2>
+  <div><span>id: </span>{{event.id}}</div>
+  <div>
+    <label>Name: {{event.name}}</label>
+  </div>
+  <button (click)="signUp()">Sign Up</button>
 
-<div>
-    <form>
-        <label for="name">name</label>
-        <input type="text" id="name" name="firstname" placeholder="First Name Last Name">
-        
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="example@wisc.edu">
-        
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" placeholder="">
-        
-        <label for="zipcode">Zip Code</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="00000">
-    
-        <input type="submit" value="Sign up">
-    </form>
 </div>

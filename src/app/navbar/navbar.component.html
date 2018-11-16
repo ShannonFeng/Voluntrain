@@ -1,10 +1,11 @@
 <div style="margin-bottom: 80px">
     <ul>
-    <li><a routerLink="/">Voluntrain</a></li>
+    <li class = "icon"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></li>
     <li><input type="text" placeholder="Search..."></li>
+
     <li *ngIf="isLoggedIn$ | async" style="float:right"><a routerLink="/logout">Sign Out</a></li>
-    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/user-login-form">Sign In</a></li>
-    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/createaccount">Create Account</a></li>
-    <li style="float:right"><a routerLink="/org-form">Create an Organization</a></li>
+    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/login">Log In</a></li>
+    <li *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/create-account">Create Account</a></li>
+    <li style="float:right"><a routerLink="/create-org">Create an Organization</a></li>
     </ul>
 </div>
