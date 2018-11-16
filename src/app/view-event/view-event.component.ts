@@ -9,6 +9,8 @@ import { Event }         from '../event';
 import { EventService }  from '../event.service';
 import { User }          from '../user';
 import { UserService}    from '../user.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-event',
@@ -37,7 +39,9 @@ export class ViewEventComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private auth:AuthService,
+    private router:Router
   ) {
   }
 
@@ -47,6 +51,26 @@ export class ViewEventComponent implements OnInit {
       .subscribe(event => this.event = event);
   }
 
+  signUp() {
+    this.userService.getData().subscribe((data) => {
+      var isLoggedIn = data.isLoggedIn;
+      if (isLoggedIn) {
+        var email = data.email;
+        var eventId = this.event.id;
+        this.auth.signUp(email, eventId).subscribe(data => {
+          if (data.success) {
+            this.router.navigate(['/']);
+          }
+          window.alert(data.message);
+        });
+      } 
+      else {
+        window.alert("Unable to sign up for event. No user is logged in.");
+      }
+    })
+  }
+
+  /*
   signUp(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     // this.eventService.addParticipant('some@email.com')
@@ -58,6 +82,7 @@ export class ViewEventComponent implements OnInit {
     //     this.user.eventSignedUp.push(id)
     // });
   }
+  */
 
   ngOnInit() {
     this.getLocation();

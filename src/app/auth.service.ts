@@ -21,6 +21,11 @@ interface logoutResult {
   success: boolean
 }
 
+interface eventSignUpResult {
+  success: boolean,
+  message: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,4 +60,10 @@ export class AuthService {
   createOrg(name, location, zipcode, bio) {
     return this.http.post<createOrgResult>("/api/createOrg", {name, location, zipcode, bio});
   }
+  
+  // Add user email to event
+  signUp(email, eventId) {
+    return this.http.post<eventSignUpResult>("/api/signup", { email, eventId });
+  }
+
 }
