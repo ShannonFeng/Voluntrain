@@ -30,4 +30,10 @@ export class EventService {
     return of(EVENTS.find(event => event.id === id));
   }
 
+  // Add User into participating list of Event
+  // addParticipant(u_email: string): Observable<Event>{
+  //   const u_email: 'some@email.com';
+  //   return this.http.post<Event>();
+  // }
+
 }
