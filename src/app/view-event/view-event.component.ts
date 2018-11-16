@@ -8,8 +8,8 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 })
 
 export class ViewEventComponent implements OnInit {
-  lat;
-  lng;
+  lat = 43.0746953;
+  lng = -89.3841695;
   zoom = 14;
   getLocation(): void{
     if (navigator.geolocation) {
@@ -23,16 +23,11 @@ export class ViewEventComponent implements OnInit {
        this.lat =43.0746953;
     }
   }
-  
-  
   constructor() { 
-    
   }
 
   ngOnInit() {  
     this.getLocation();
-
-    
     console.log(this.lat,this.lng);
   }
   
