@@ -1,13 +1,8 @@
-
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { Event }         from '../event';
 import { EventService }  from '../event.service';
-import { User }          from '../user';
 import { UserService}    from '../user.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -39,7 +34,6 @@ export class ViewEventComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private userService: UserService,
-    private location: Location,
     private auth:AuthService,
     private router:Router
   ) {
