@@ -9,18 +9,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./createaccount.component.css']
 })
 export class CreateaccountComponent implements OnInit {
-  signupForm; 
+  signupForm;
 
   ngOnInit() {}
 
   constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router) {
     this.signupForm = formBuilder.group({
-      name: '',
-      email: '',
-      zipcode: '',
-      password: '',
-      description: '',  // aka "bio"
-      interests: ''
+      name: formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.minLength(4)
+      ])),
+      email: formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])),
+      zipcode: formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5)
+      ])),
+      password: formBuilder.control('', Validators.required)
     });
   }
 
@@ -39,6 +46,6 @@ export class CreateaccountComponent implements OnInit {
       } else {
         window.alert(data.message);   // otherwise display error msg to user
       }
-    });  
+    });
   }
 }

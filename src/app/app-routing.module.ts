@@ -5,16 +5,17 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { OrgFormComponent } from './org-form/org-form.component';
-import { LogoutComponent } from './logout/logout.component';
-import { ViewEventComponent } from './view-event/view-event.component';
+import { EventsComponent} from './events/events.component';
+import { ViewEventComponent} from './view-event/view-event.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'user-login-form', component: UserLoginFormComponent},
-  { path: 'createaccount', component: CreateaccountComponent},
-  { path: 'org-form', component: OrgFormComponent},
-  { path: 'logout', component: LogoutComponent},
-  { path: 'view-event', component: ViewEventComponent }  
+  { path: 'login', component: UserLoginFormComponent},
+  { path: 'create-account', component: CreateaccountComponent},
+  { path: 'create-org', component: OrgFormComponent},
+  { path: 'events', component: EventsComponent},
+  { path: 'events-details/:id', component: ViewEventComponent}
 ];
 
 @NgModule({

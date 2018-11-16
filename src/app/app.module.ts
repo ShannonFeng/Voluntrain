@@ -15,9 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
-import { AuthService } from './auth.service';
-import { ViewEventComponent } from './view-event/view-event.component';
-
+import { EventsComponent } from './events/events.component';
+import { EventService } from './event.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +27,7 @@ import { ViewEventComponent } from './view-event/view-event.component';
     CreateaccountComponent,
     LogoutComponent,
     OrgFormComponent,
+    EventsComponent,
     ViewEventComponent
   ],
   imports: [
@@ -37,9 +37,13 @@ import { ViewEventComponent } from './view-event/view-event.component';
     HttpModule,
     FormsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA8A-n9JeSALtz5cXQp_dLqn22gPnyDu4c'
+    })
   ],
   providers: [
-    UserService, AuthService, NavbarComponent
+    UserService,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

@@ -12,13 +12,23 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class UserLoginFormComponent {
   loginForm;   // will be used for FormGroup instance
 
-  ngOnInit() {}
+  constructor(
+    private formBuilder: FormBuilder
+  ){}
 
-  constructor(private formBuilder: FormBuilder, private router:Router, private auth:AuthService, private navbar:NavbarComponent) {
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])),
+      password: this.formBuilder.control('', Validators.required)
     });
+
+  }
+
+  get email(){
+    return this.loginForm.get('email')
   }
 
   submit() {
