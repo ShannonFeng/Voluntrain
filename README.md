@@ -2,6 +2,10 @@ note: this readme was last updated on 11/16/2018
 
 # Voluntrain
 
+## Getting started
+1. Clone or download this repository to your computer.
+2. In a terminal, change directory to where you cloned/downloaded the repository. Run `npm install` to install the project dependencies.
+
 ## Running the Web Application
 
 Run `npm run start-all` to start both the Angular client and the server at the same time. Navigate to http://localhost:4200 to view the web application.
