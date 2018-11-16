@@ -2,11 +2,12 @@
 
 #testid {display: block;
     color: rgb(12, 1, 1);
+    background-color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     border: 2px solid #73AD21;
-    width: 50%;
+    width: 97%;
     font-size: 15px;
     margin-bottom: 10px;
 }
@@ -17,7 +18,8 @@
     padding: 14px 16px;
     text-decoration: none;
     border: 2px solid #73AD21;
-    width: 50%;
+    background-color: #f2f2f2;
+    width: 97%;
     font-size: 15px;
     margin-bottom: 10px;
 }
@@ -28,14 +30,16 @@ h1{
    
     display: block;
     color: rgb(12, 1, 1);
+    background-color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     border: 2px solid rgb(9, 15, 1);
-    width: 50%;
+    width: 97%;
     font-size: 15px;
     height: 100px;
     }
+      
     input[type=text], select {
         width: 100%;
         padding: 12px 20px;
@@ -63,7 +67,15 @@ h1{
     input[type=submit]:hover {
         background-color: #45a049;
     }
-    
+  
+    agm-map {
+        border-radius: 5px;
+        height: 500px;
+        width: 100%;
+        margin: 0 auto;
+        z-index: 1;
+    }
+
     div {
         border-radius: 5px;
         background-color: #f2f2f2;
