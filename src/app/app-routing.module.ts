@@ -7,6 +7,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { OrgFormComponent } from './org-form/org-form.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -14,13 +16,23 @@ const routes: Routes = [
   { path: 'createaccount', component: CreateaccountComponent},
   { path: 'org-form', component: OrgFormComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'view-event', component: ViewEventComponent }  
+  { path: 'view-event', component: ViewEventComponent },
+  { path: 'dialog', component: DialogComponent },
+  { path: 'dialog', component: DialogComponentDialog },
+
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [ RouterModule ]
+  exports: [ 
+    RouterModule 
+  ],
+
+  entryComponents: [
+    DialogComponent,
+    DialogComponentDialog
+  ],
 })
 export class AppRoutingModule { }

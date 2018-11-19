@@ -17,8 +17,15 @@ import { LogoutComponent } from './logout/logout.component';
 import { OrgFormComponent } from './org-form/org-form.component';
 import { AuthService } from './auth.service';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
 
 import { AgmCoreModule } from '@agm/core';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatMenuModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -30,8 +37,11 @@ import { AgmCoreModule } from '@agm/core';
     LogoutComponent,
     OrgFormComponent,
     ViewEventComponent,
+    DialogComponent,
+    DialogComponentDialog
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -40,11 +50,29 @@ import { AgmCoreModule } from '@agm/core';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA8A-n9JeSALtz5cXQp_dLqn22gPnyDu4c'
-    })
+    }),
+    MatDialogModule,
+    MatCardModule,
+    MatMenuModule,
+
+  ],
+  entryComponents: [
+    DialogComponent,    
+    DialogComponentDialog
+
   ],
   providers: [
-    UserService, AuthService, NavbarComponent
+    UserService, AuthService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    MatDialogModule,
+    DialogComponent,
+    DialogComponentDialog
+
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { 
+
+  
+}

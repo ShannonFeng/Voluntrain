@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import{ DialogComponent} from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-view-event',
@@ -8,9 +9,11 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 })
 
 export class ViewEventComponent implements OnInit {
+
   lat = 43.0746953;
   lng = -89.3841695;
   zoom = 14;
+
   getLocation(): void{
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
@@ -23,7 +26,8 @@ export class ViewEventComponent implements OnInit {
        this.lat =43.0746953;
     }
   }
-  constructor() { 
+  constructor(private dialog: DialogComponent) { 
+  
   }
 
   ngOnInit() {  
