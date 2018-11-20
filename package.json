@@ -8,11 +8,24 @@
     "start-server": "node server/server.ts",
     "start-all": "concurrently --kill-others \"npm start\" \"npm run start-server\"",
     "build": "ng build",
-    "test": "mocha || true",
+    "test": "nyc --reporter=text mocha --exit",
     "test-cov": "istanbul cover _mocha",
     "coverage": "node ./node_modules/.bin/istanbul",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
   },
   "private": true,
   "dependencies": {
@@ -62,12 +75,9 @@
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "protractor": "~5.4.0",
+    "source-map-support": "^0.5.9",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1"
-  },
-  "nyc": {
-    "sourceMap": false,
-    "instrument": false
   }
 }

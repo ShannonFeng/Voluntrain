@@ -21,3 +21,13 @@
 </agm-map>
 
 </div>
+
+<div *ngIf="event">
+  <h2>Event Details</h2>
+  <div><span>id: </span>{{event.id}}</div>
+  <div>
+    <label>Name: {{event.name}}</label>
+  </div>
+  <button (click)="signUp()">Sign Up</button>
+
+</div>

@@ -9,18 +9,18 @@ import { Router } from "@angular/router"
   styleUrls: ['./org-form.component.css']
 })
 export class OrgFormComponent implements OnInit {
-  orgform; 
+
+ngOnInit() { }
+
+  orgform;
 
   constructor(private formBuilder: FormBuilder, private router:Router, private Auth: AuthService) {
     this.orgform = this.formBuilder.group({
       name: '',
-      location: '', 
+      location: '',
       zipcode: '',
       bio: ''
     });
-  }
-
-  ngOnInit() {
   }
 
   submit() {

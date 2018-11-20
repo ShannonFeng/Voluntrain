@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  list : Array<String> = ["A", "b", 'asdf']
   isLoggedIn: boolean = false;
   name: String = "";
   email: String = "";

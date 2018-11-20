@@ -38,6 +38,18 @@ MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
   console.log("Voluntrain server stated on localhost:"+portNum);
 });
 
+// Sign up for an event
+app.post('/api/signup', function(req, res) {
+  var email = req.body.email;
+  var eventId = req.body.eventId;
+  console.log(email);
+  console.log(eventId);
+  res.json({
+    success: true,
+    message: "Event sign up clicked."
+  })
+})
+
 app.post('/api/createAccount/', function (req, res) {
   var email = req.body.email;
   // First check if user email is not in db

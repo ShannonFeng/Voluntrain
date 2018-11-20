@@ -1,21 +1,26 @@
-<div class="form-group">
-  <h2>Login</h2>
+<h2>Log In</h2>
   <form
    [formGroup]="loginForm"
    (ngSubmit)="submit()">
 
-    <div class = "form-control">
-      <label for="email">Email: </label>
-      <input type="text" class="form-group" id ="email" required formControlName="email">
-    </div>
+      <label>Email:
+      <input type="text" id ="email" placeholder="example@wisc.edu" formControlName="email">
+      <div *ngIf="email.invalid && (email.touched || email.dirty)" class="error">
+        Invalid email format
+      </div>
 
-    <div class = "form-control">
-      <label for="password">Password: </label>
-      <input type="password" class="form-group" id="password" formControlName="password">
-    </div>
+       </label><br>
 
-    <button type="submit" class="btn btn-success">Login</button>
+      <label>Password:
+      <input type="password" id="password" required formControlName="password">
+      <!-- <div *ngIf="password.errors.required">
+        Password is required
+      </div> -->
+       </label><br>
+
+    <button  type="submit" [disabled]="!loginForm.valid">Log In</button>
 
   </form>
-
-</div>
+  <!-- <p>
+  Form Status: {{ loginForm.status }}
+  </p> -->

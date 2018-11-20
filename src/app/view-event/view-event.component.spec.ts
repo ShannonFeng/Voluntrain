@@ -36,7 +36,10 @@ describe('ViewEventComponent', () => {
         fixture.detectChanges();
     })
 
+    // Note: omitting this test from Iteration 2
+    /*
     it('should create the view event component', () => {
         expect(component).toBeTruthy();
     })
+*/
 })
