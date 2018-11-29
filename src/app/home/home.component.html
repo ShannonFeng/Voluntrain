@@ -1,19 +1,24 @@
-<h1>Welcome to Voluntrain!</h1>
-
-<!-- Load icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div style="background-color: grey; padding-bottom:10px" class="searchBar">
-  <input type="text" id="userSearch" placeholder="Search for volunteer events...">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</div>
-
-<div *ngIf="!isLoggedIn">
-  <p>No user is currently logged in.</p>
-</div>
-
-<div *ngIf="isLoggedIn">
-  <p>Currently logged in user: {{ name }}</p>
-  <p>Email: {{ email }}</p>
-  <p>Zipcode: {{ zipcode }}</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <mat-card style="text-align:left">
+        <mat-form-field style="width: 100%">
+          <input (keyup)="searchEvents($event)" matInput placeholder="Search for volunteer events...">
+        </mat-form-field>
+        <div class="container" *ngFor="let result of results">
+            <hr/>
+            <h5><b>{{ result.event_name }}</b></h5>
+            <p><b>Organization: </b>{{ result.org_id }}</p>
+            <p><b>Description: </b>{{ result.description }}</p>
+            <p><b>Sign Up List: </b>{{ result.signUpList }}</p>
+            <hr/>
+          </div>
+      </mat-card>
+    </div>
+    <div class="col">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
 </div>

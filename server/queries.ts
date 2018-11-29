@@ -5,13 +5,18 @@ var bcrypt = require('bcrypt');
 var saltRounds = 10;
 var connected;
 var db;
+var dbName = "Voluntrain";  // default
+
+function setDbname(dbName) {
+    this.dbName = dbName;
+}
 
 // Connects to the Voluntrain database if not connected already, then calls the callback function
 function connectToDb(callback) {
     if (!connected) {
         MongoClient.connect(config.dbUri, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
-            db = client.db("Voluntrain");
+            db = client.db(dbName);
             connected = true;
             callback();
         });
@@ -19,6 +24,16 @@ function connectToDb(callback) {
     else {
         callback();
     }
+}
+
+module.exports.searchEvents = function(input, callback) {
+    connectToDb(() => {
+        var query = { event_name: { $regex: input, $options: 'i' } }    // 'i' option means case insensitive
+        db.collection("Events").find(query).toArray((err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    }) 
 }
 
 // Inserts a new user into db
