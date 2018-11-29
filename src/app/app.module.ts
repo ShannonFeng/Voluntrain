@@ -28,6 +28,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchPageComponent } from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // Angular Material imports:
 import {
@@ -82,7 +83,8 @@ import {
     DialogComponent,
     DialogComponentDialog,
     CreateEventComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

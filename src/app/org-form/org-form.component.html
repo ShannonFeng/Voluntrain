@@ -5,6 +5,7 @@
     (ngSubmit)="submit()">
 
     <div class = "required">
+      
       <label for="name">Org Name: </label>
       <input type="text" class="form-group" id="name" required formControlName="name">
     </div>
@@ -28,7 +29,25 @@
         Select images: <input type="file" name="img" multiple>
     </div>
 
-    <input type="submit" value="Create Organization">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Input">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <textarea matInput placeholder="Textarea"></textarea>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select placeholder="Select">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!----<input type="submit" value="Create Organization">-->
+    <button type="submit" mat-raised-button color= primary>Create Organization</button>
+
 
   </form>
 </div>

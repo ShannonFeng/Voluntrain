@@ -6,38 +6,27 @@ import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { OrgFormComponent } from './org-form/org-form.component';
 import { EventsComponent} from './events/events.component';
+import { ViewEventComponent} from './view-event/view-event.component';
 import { LogoutComponent } from './logout/logout.component';
-import { ViewEventComponent } from './view-event/view-event.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogComponentDialog } from './dialog/dialog.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: UserProfileComponent},
   { path: 'login', component: UserLoginFormComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'view-event', component: ViewEventComponent },
-  { path: 'dialog', component: DialogComponent },
-  { path: 'dialog', component: DialogComponentDialog },
-
   { path: 'create-account', component: CreateaccountComponent},
   { path: 'create-org', component: OrgFormComponent},
   { path: 'events', component: EventsComponent},
-  { path: 'events-details/:id', component: ViewEventComponent},
-  { path: 'results', component: SearchPageComponent}
+  { path: 'events-details/:id', component: ViewEventComponent}
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [ 
-    RouterModule 
-  ],
-
-  entryComponents: [
-    DialogComponent,
-    DialogComponentDialog
-  ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
