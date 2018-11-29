@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import{ DialogComponent} from '../dialog/dialog.component';
 import { ActivatedRoute } from '@angular/router';
 
 import { Event }         from '../event';
@@ -14,10 +16,12 @@ import { Router } from '@angular/router';
 })
 
 export class ViewEventComponent implements OnInit {
+
   event: Event;
   lat = 43.0746953;
   lng = -89.3841695;
   zoom = 14;
+
   getLocation(): void{
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
@@ -35,7 +39,8 @@ export class ViewEventComponent implements OnInit {
     private eventService: EventService,
     private userService: UserService,
     private auth:AuthService,
-    private router:Router
+    private router:Router,
+    private dialog: DialogComponent
   ) {
   }
 

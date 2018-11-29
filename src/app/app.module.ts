@@ -11,7 +11,8 @@ import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
-import { UserService } from './user.service'
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
@@ -21,6 +22,14 @@ import { EventsComponent } from './events/events.component';
 import { EventService } from './event.service';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
+
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatMenuModule} from '@angular/material';
+
 import { SearchPageComponent } from './search-page/search-page.component';
 
 // Angular Material imports:
@@ -73,6 +82,8 @@ import {
     OrgFormComponent,
     EventsComponent,
     ViewEventComponent,
+    DialogComponent,
+    DialogComponentDialog,
     CreateEventComponent,
     SearchPageComponent
   ],
@@ -125,10 +136,20 @@ import {
     MatTreeModule,
   ],
   providers: [
+    UserService, 
+    AuthService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    MatDialogModule,
+    DialogComponent,
+    DialogComponentDialog,
     UserService,
     EventService,
     NavbarComponent
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { 
+
+  
+}
