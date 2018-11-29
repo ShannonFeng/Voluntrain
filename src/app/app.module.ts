@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -26,9 +25,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { DialogComponentDialog } from './dialog/dialog.component';
 
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
-import {MatDialogModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatMenuModule} from '@angular/material';
 
 import { SearchPageComponent } from './search-page/search-page.component';
 
