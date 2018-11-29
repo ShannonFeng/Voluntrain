@@ -1,11 +1,11 @@
 input[type=text], select {
-    width: 100%;
+    /*width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box;*/
 }
 
 input[type=submit] {
@@ -22,11 +22,21 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
-
+button{
+    font-size: 16px;
+}
 div {
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color:f2f2f2;
     padding: 20px;
     width: 70%;
     margin: 0 auto;
 }
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
