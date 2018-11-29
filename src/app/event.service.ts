@@ -20,6 +20,10 @@ export class EventService {
     private http: HttpClient
   ) { }
 
+  searchEvents(input) {
+    return this.http.post<Event[]>("/api/search", {input});
+  }
+
   // Get Events from the server
   getEvents(): Observable<Event[]>{
     return of(EVENTS);
