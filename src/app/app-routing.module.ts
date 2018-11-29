@@ -8,10 +8,14 @@ import { OrgFormComponent } from './org-form/org-form.component';
 import { EventsComponent} from './events/events.component';
 import { ViewEventComponent} from './view-event/view-event.component';
 import { LogoutComponent } from './logout/logout.component';
- 
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: UserProfileComponent},
+  { path: 'myProfile', component: UserProfileComponent},
   { path: 'login', component: UserLoginFormComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'create-account', component: CreateaccountComponent},
