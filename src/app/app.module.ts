@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatMenuModule} from '@angular/material';
 
 import { SearchPageComponent } from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
     DialogComponent,
     DialogComponentDialog,
     CreateEventComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

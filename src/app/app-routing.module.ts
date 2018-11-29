@@ -11,9 +11,10 @@ import { ViewEventComponent } from './view-event/view-event.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogComponentDialog } from './dialog/dialog.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: UserProfileComponent},
   { path: 'login', component: UserLoginFormComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'view-event', component: ViewEventComponent },
