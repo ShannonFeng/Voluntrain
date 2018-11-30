@@ -86,7 +86,7 @@ import {
     DialogComponentDialog,
     CreateEventComponent,
     SearchPageComponent,
-    UserProfileComponent
+    UserProfileComponent,
     OrgComponent,
     ViewOrgComponent
   ],
