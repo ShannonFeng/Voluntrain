@@ -23,6 +23,8 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { ViewEventComponent } from './view-event/view-event.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogComponentDialog } from './dialog/dialog.component';
+import { OrgComponent } from './org/org.component';
+import { ViewOrgComponent } from './view-org/view-org.component';
 
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -85,6 +87,8 @@ import {
     CreateEventComponent,
     SearchPageComponent,
     UserProfileComponent
+    OrgComponent,
+    ViewOrgComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -134,8 +138,13 @@ import {
     MatTooltipModule,
     MatTreeModule,
   ],
+  entryComponents: [
+    DialogComponent,
+    DialogComponentDialog
+
+  ],
   providers: [
-    UserService, 
+    UserService,
     AuthService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     MatDialogModule,
@@ -148,7 +157,7 @@ import {
   bootstrap: [AppComponent]
 })
 
-export class AppModule { 
+export class AppModule {
 
-  
+
 }
