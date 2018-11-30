@@ -1,3 +1,19 @@
-<p>
-  view-org works!
-</p>
+<div *ngIf="org">
+  <h1>My Organization</h1>
+  <!-- <div><span>id: </span>{{event.id}}</div> -->
+  <div>
+    <label>Name: {{org.name}}</label><br>
+    <label>Address: {{org.address}}</label><br>
+    <label>Admins : {{org.adminEmails}}</label><br>
+
+    <label>Events :
+      <a *ngFor = "let IDs of org.eventsID; let i = index" routerLink="/events-details/{{org.eventsID[i]}}">
+        <!-- {{events[i].name}} -->
+        {{events[i].name}},
+      </a>
+    </label><br>
+
+  </div>
+  <button (click)="createEvent(org.id)">Create Event</button>
+
+</div>

@@ -8,5 +8,7 @@
     <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/login">Log In</a></li>
     <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/create-account">Create Account</a></li>
     <li class="pagelink" style="float:right"><a routerLink="/create-org">Create an Organization</a></li>
+    <li class="pagelink" *ngIf="isLoggedIn$ | async" style="float:right"><a routerLink="/organizations">My Organizations</a></li>
+
     </ul>
 </div>

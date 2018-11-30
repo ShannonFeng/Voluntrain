@@ -1,15 +1,13 @@
-<h1>Event Name</h1>
-<label id="testid" mat-raised-button href="javascript:void(0);">view event</label>
+<div *ngIf="event">
+  <h2>Event Details</h2>
+  <div><span>id: </span>{{event.id}}</div>
+  <div>
+    <label>Name: {{event.name}}</label><br>
+    <label>Participants: {{event.participant}}</label>
+  </div>
+  <button (click)="signUp()">Sign Up</button>
 
-<h1>Organization </h1>
-<label id="testid2" mat-raised-button href="javascript:void(0);">Organization</label>
-
-<h1>Event Description</h1>
-<label id="demo" mat-raised-button href="javascript:void(0);">description box</label>
-
-
-
-<button class="button" mat-button (click)="dialog.openDialog()">Join Event</button>
+</div>
 
 <h1>Event Location</h1>
 <!-- this creates a google map on the page with the given lat/lng from -->
@@ -19,15 +17,5 @@
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 
 </agm-map>
-
-</div>
-
-<div *ngIf="event">
-  <h2>Event Details</h2>
-  <div><span>id: </span>{{event.id}}</div>
-  <div>
-    <label>Name: {{event.name}}</label>
-  </div>
-  <button (click)="signUp()">Sign Up</button>
 
 </div>

@@ -7,6 +7,13 @@ import { ViewEventComponent } from './view-event/view-event.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { EventsComponent } from './events/events.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
+import { OrgComponent } from './org/org.component';
+import { ViewOrgComponent } from './view-org/view-org.component';
+
+
+
 
 export const testDeclarations= [
     UserLoginFormComponent,
@@ -16,6 +23,10 @@ export const testDeclarations= [
     LogoutComponent,
     ViewEventComponent,
     NavbarComponent,
+    DialogComponent,
+    DialogComponentDialog,
     EventsComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    OrgComponent,
+    ViewOrgComponent
 ];

@@ -12,9 +12,17 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { OrgFormComponent } from './org-form/org-form.component';
+import { OrgComponent } from './org/org.component';
+import { ViewOrgComponent } from './view-org/view-org.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserService } from './user.service';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponentDialog } from './dialog/dialog.component';
+import { EventsComponent } from './events/events.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+
+
 
 
 describe('AppComponent', () => {
@@ -28,7 +36,13 @@ describe('AppComponent', () => {
         CreateaccountComponent,
         OrgFormComponent,
         LogoutComponent,
-        ViewEventComponent
+        DialogComponent,
+        DialogComponentDialog,
+        ViewEventComponent,
+        EventsComponent,
+        OrgComponent,
+        ViewOrgComponent,
+        SearchPageComponent
       ],
       imports: [
         AppRoutingModule,
@@ -49,7 +63,7 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-  
+
 /*
   it(`should have as title 'angular-testing'`, () => {
     const fixture = TestBed.createComponent(AppComponent);

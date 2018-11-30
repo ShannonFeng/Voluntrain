@@ -14,14 +14,14 @@ describe('CreateaccountComponent', () => {
 
     beforeEach(async() => {
         TestBed.configureTestingModule({
-            declarations: [ 
+            declarations: [
                 CreateaccountComponent,
                 testDeclarations
             ],
-            providers: [ 
-                testProviders 
+            providers: [
+                testProviders
             ],
-            imports: [ 
+            imports: [
                 testImports
             ]
         })
@@ -35,17 +35,28 @@ describe('CreateaccountComponent', () => {
 
         fixture.detectChanges();
     })
-    
+
     it('should create the createaccount component', () => {
         expect(component).toBeTruthy();
     })
 
     it('should make sure form is valid after entering required info', () => {
         expect(component.signupForm.valid).toBeFalsy();
+
         component.signupForm.controls['name'].setValue("Mr. Create Account Test");
         component.signupForm.controls['email'].setValue("test@test.com");
         component.signupForm.controls['zipcode'].setValue("98765");
         component.signupForm.controls['password'].setValue("123cats456");
         expect(component.signupForm.valid).toBeTruthy();
     });
+
+    it('should make sure form is invalid', () => {
+        component.signupForm.controls['name'].setValue("");
+        component.signupForm.controls['email'].setValue("test.com");
+        component.signupForm.controls['zipcode'].setValue("9876");
+        component.signupForm.controls['password'].setValue("");
+        expect(component.signupForm.valid).toBeFalsy();
+    });
+
+
 })

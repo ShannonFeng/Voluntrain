@@ -30,6 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatMenuModule} from '@angular/material';
 
 import { SearchPageComponent } from './search-page/search-page.component';
+import { OrgComponent } from './org/org.component';
+import { ViewOrgComponent } from './view-org/view-org.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { SearchPageComponent } from './search-page/search-page.component';
     DialogComponent,
     DialogComponentDialog,
     CreateEventComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    OrgComponent,
+    ViewOrgComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -64,12 +68,12 @@ import { SearchPageComponent } from './search-page/search-page.component';
 
   ],
   entryComponents: [
-    DialogComponent,    
+    DialogComponent,
     DialogComponentDialog
 
   ],
   providers: [
-    UserService, 
+    UserService,
     AuthService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     MatDialogModule,
@@ -82,7 +86,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
   bootstrap: [AppComponent]
 })
 
-export class AppModule { 
+export class AppModule {
 
-  
+
 }
