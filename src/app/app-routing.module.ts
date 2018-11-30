@@ -14,13 +14,14 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: UserProfileComponent},
+  { path: '', component: HomeComponent},
   { path: 'myProfile', component: UserProfileComponent},
   { path: 'login', component: UserLoginFormComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'create-account', component: CreateaccountComponent},
   { path: 'create-org', component: OrgFormComponent},
   { path: 'events', component: EventsComponent},
+  { path: 'search', component: SearchPageComponent},
   { path: 'events-details/:id', component: ViewEventComponent}
 ];
 

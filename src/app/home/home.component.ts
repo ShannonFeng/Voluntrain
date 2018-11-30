@@ -21,9 +21,24 @@ export class HomeComponent implements OnInit {
 
   results: Array<Object> = [];
 
+  getLocation(): void{
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position)=>{
+          this.lng = position.coords.longitude;
+          this.lat = position.coords.latitude;
+        });
+    } else {
+       console.log("No support for geolocation");
+       this.lng =-89.3841695;
+       this.lat =43.0746953;
+    }
+  }
+
+
   constructor(private user:UserService, private auth:AuthService, private eventService:EventService) { }
 
   ngOnInit() {
+    this.getLocation();
     this.user.getData().subscribe(data => {
       if(data.isLoggedIn) {
         this.auth.setLoggedIn(true);
