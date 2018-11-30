@@ -154,6 +154,13 @@ app.post('/api/login', (req, res) => {
   });
 })
 
+app.post('/api/search', (req, res) => {
+  var input = req.body.input;
+  queries.searchEvents(input, function(results) {
+    res.json(results);
+  })
+})
+
 app.get('/api/userdata', (req, res) => {
   var email = req.session.email;
   queries.checkUserExists(email, function(userExists) {

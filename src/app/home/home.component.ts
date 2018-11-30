@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  lat = 43.0746953;
+  lng = -89.3841695;
+  zoom = 14;
 
   list : Array<String> = ["A", "b", 'asdf']
   isLoggedIn: boolean = false;
@@ -15,7 +19,9 @@ export class HomeComponent implements OnInit {
   email: String = "";
   zipcode: Number = 0;
 
-  constructor(private user:UserService, private auth:AuthService) { }
+  results: Array<Object> = [];
+
+  constructor(private user:UserService, private auth:AuthService, private eventService:EventService) { }
 
   ngOnInit() {
     this.user.getData().subscribe(data => {
@@ -33,6 +39,19 @@ export class HomeComponent implements OnInit {
         console.log("No user is currently logged in.");
       }
     })
+  }
+
+  searchEvents(event: any) {
+    var input = event.target.value;
+    if (input != "") {
+      this.eventService.searchEvents(input).subscribe(result => {
+        this.results = result;
+      });
+    }
+    else {
+      this.results = [];
+    }
+    
   }
 
 }
