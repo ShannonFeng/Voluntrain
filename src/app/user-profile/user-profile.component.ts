@@ -1,4 +1,5 @@
-import { Component, ViewChild, Renderer2, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,18 +8,13 @@ import { Component, ViewChild, Renderer2, OnInit, ElementRef } from '@angular/co
 })
 export class UserProfileComponent implements OnInit {
 
-  @ViewChild('description') bio: any;
-  constructor(private renderer: Renderer2) { }
+  user;
+
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
+    this.userService.getData().subscribe(info => {
+      this.user = info;
+    });
   }
-
-  testFunction() {
-    console.log("hello");
-    const div = this.renderer.createElement('div');
-    const text = this.renderer.createText('Some text in div');
-    this.renderer.appendChild(div, text);
-    this.renderer.appendChild(this.bio._element.nativeElement, div);
-  }
-
 }

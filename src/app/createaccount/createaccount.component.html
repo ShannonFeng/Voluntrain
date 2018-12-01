@@ -4,42 +4,42 @@
     [formGroup]="signupForm"
     (ngSubmit)="submit()">
 
-        <div  class = "required">
+        <div class="required">
            <mat-form-field appearance = "outline">
                 <mat-label>Name</mat-label>
                 <input matInput type="text" class = "required" id="name" name="name" placeholder="First Name Last Name" required formControlName="name">
             </mat-form-field>
         </div>
 
-        <div class = "required">
+        <div class="required">
             <mat-form-field appearance = "outline">
                 <mat-label for="email">Email</mat-label>
                 <input matInput type="text" class = "required" id="email" name="email" placeholder="example@wisc.edu" required formControlName="email">
             </mat-form-field>
         </div>
 
-        <div class = "required">
+        <div class="required">
             <mat-form-field appearance = "outline">
                 <mat-label for="password">Password</mat-label>
                 <input matInput type="password" class = "required" id="password" name="password" placeholder="" required formControlName="password">
             </mat-form-field>
         </div>
 
-        <div class = "required">
+        <div class="required">
             <mat-form-field appearance = "outline">
                 <mat-label for="zipcode">Zip Code</mat-label>
                 <input matInput type="text" class = "required" id="zipcode" name="zipcode" placeholder="00000" required formControlName="zipcode">
             </mat-form-field>
         </div>
 
-        <div class = "optional">
+        <div class="optional">
             <mat-form-field appearance = "outline">
                 <mat-label for="description">Description</mat-label>
                 <textarea matInput  rows="4" cols="100" type="text" class = "optional" id="description" name="description" placeholder="Optional description of yourself" formControlName="description"></textarea>
             </mat-form-field>
         </div>
 
-        <div class = "optional">
+        <div class="optional">
             <mat-form-field appearance = "outline">
                 <mat-label for="interests">Interests</mat-label>
                 <textarea matInput type="text" class = "required" id="interests" name="interests" placeholder="Possible Interests" formControlName="interests"></textarea>

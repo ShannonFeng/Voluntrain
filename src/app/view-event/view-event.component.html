@@ -1,8 +1,10 @@
-<mat-card>
-  <h6>Event: {{ (event | async).event_name }}</h6>
-  <p>Description: {{ (event | async).description }}</p>
-  <p>Sign Up List: {{ (event | async).signUpList }}</p>
-</mat-card>>
+<div class="container" style="">
+  <mat-card *ngIf="event">
+    <h6>Event: {{ event.event_name }}</h6>
+    <p>Description: {{ event.description }}</p>
+    <p>Sign Up List: {{ event.signUpList }}</p>
+  </mat-card>
+</div>
 
 <button class="button" mat-button (click)="dialog.openDialog()">Sign Up</button>
 

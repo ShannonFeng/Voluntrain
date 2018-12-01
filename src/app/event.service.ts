@@ -22,6 +22,7 @@ export class EventService {
     return of(EVENTS);
   }
 */
+
   getEvent(id) : Observable<Event>{
     return this.http.post<Event>("/api/event", {id});
   }

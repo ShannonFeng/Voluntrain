@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {LayoutModule} from '@angular/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { EventService } from '../event.service';
-
 
 @Component({
   selector: 'app-home',
