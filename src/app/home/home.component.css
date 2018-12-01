@@ -1,5 +1,4 @@
 .searchBar input[type=text] {
-    float: center;
     width: 70%; 
     padding: 20px;
     border: none;
@@ -7,10 +6,67 @@
     margin-right: 16px;
     font-size: 17px;
 }
-agm-map {
+form.example button {
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 10px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  .mat_form_field{
+    float: left;
+  }
+  .results-container {
+    width: 100%;
+    height: 100%;
+    margin: 1px;
+    border: 5px solid #555;
+  }
+  .events-side {
+    width: 35%;
+  }
+  
+  
+  agm-map {
     border-radius: 5px;
-    height: 500px;
+    height: 600px;
     width: 100%;
     margin: 0 auto;
     z-index: 1;
 }
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+    
+  }
+  
+  .example-sidenav {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+    width: 25%;
+  }
+  
