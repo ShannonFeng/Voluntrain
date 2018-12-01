@@ -1,5 +1,3 @@
-note: this readme was last updated on 11/16/2018
-
 # Voluntrain
 
 ## Getting started
