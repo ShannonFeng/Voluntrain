@@ -1,47 +1,48 @@
 <div class = "form-group">
-  <h1>Create an Organization</h1>
-  <form
-    [formGroup]="orgform"
-    (ngSubmit)="submit()">
- <mat-card style="background-color: f2f2f2">
-    <div class = "required">
-     
+    <h1>Create an Organization</h1>
+    <form
+      [formGroup]="orgform"
+      (ngSubmit)="submit()">
+   <mat-card style="background-color: f2f2f2">
+      <div class = "required">
+       
+          <mat-form-field appearance = "outline">
+              <mat-label for="name">Organization Name: </mat-label>
+              <input matInput type="text" class="form-group" id="name" required formControlName="name">
+         </mat-form-field>
+       
+      </div>
+  
+      <div class = "required">
         <mat-form-field appearance = "outline">
-            <mat-label for="name">Organization Name: </mat-label>
-            <input matInput type="text" class="form-group" id="name" required formControlName="name">
-       </mat-form-field>
-     
-    </div>
-
-    <div class = "required">
-      <mat-form-field appearance = "outline">
-        <mat-label for="location">Address: </mat-label>
-        <input matInput type="text" id="location" required formControlName="location">
-      </mat-form-field>
-    </div>
-
-    <div class = "required">
-        <mat-form-field appearance = "outline">
-          <mat-label for="zipcode">Zipcode: </mat-label>
-          <input matInput type="text" id="zipcode" required formControlName="zipcode">
+          <mat-label for="location">Address: </mat-label>
+          <input matInput type="text" id="location" required formControlName="location">
         </mat-form-field>
-    </div>
-
-    <div class = "optional">
-        <mat-form-field appearance = "outline">
-        <mat-label for="bio">Description/Mission Statement: </mat-label>
-        <textarea matInput rows="4" cols= "95" name="comment" form="usrform" formControlName="bio"></textarea>
-        </mat-form-field>
-    </div>
-
-    <div class = "optional">
-        Select images: <input type="file" name="img" multiple>
-    </div>
-    <br>
-
-    <!----<input type="submit" value="Create Organization">-->
-    <button type="submit" mat-raised-button color= primary>Create Organization</button>
- </mat-card>
-
-  </form>
-</div>
+      </div>
+  
+      <div class = "required">
+          <mat-form-field appearance = "outline">
+            <mat-label for="zipcode">Zipcode: </mat-label>
+            <input matInput type="text" id="zipcode" required formControlName="zipcode">
+          </mat-form-field>
+      </div>
+  
+      <div class = "optional">
+          <mat-form-field appearance = "outline">
+          <mat-label for="bio">Description/Mission Statement: </mat-label>
+          <textarea matInput rows="4" cols= "95" name="comment" form="usrform" formControlName="bio"></textarea>
+          </mat-form-field>
+      </div>
+  
+      <div class = "optional">
+          Select images: <input type="file" name="img" multiple>
+      </div>
+      <br>
+  
+      <!----<input type="submit" value="Create Organization">-->
+      <button type="submit" mat-raised-button color= primary>Create Organization</button>
+   </mat-card>
+  
+    </form>
+  </div>
+  

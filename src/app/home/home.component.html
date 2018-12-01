@@ -24,7 +24,9 @@
     <mat-sidenav-content>
       <div>
         <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
-         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>             
+         <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>              -->
+         <agm-marker  *ngFor="let data of markers; let i = index" [latitude]="data.lat" [longitude]="data.lng"></agm-marker>
+
         </agm-map>
       </div>
     </mat-sidenav-content>

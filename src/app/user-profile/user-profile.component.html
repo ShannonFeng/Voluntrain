@@ -1,22 +1,23 @@
 <div>
-  <div class="username">
-    <label><b>Name:</b> {{user?.name}} </label>
-    <!--<i class="fas fa-edit"></i>-->
+    <div class="username">
+      <label><b>Name:</b> {{user?.name}} </label>
+      <!--<i class="fas fa-edit"></i>-->
+    </div>
+  
+    <div #description class="bio">
+      <label><b>Email:</b> {{user?.email}} </label>
+      <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
+    </div>
+  
+    <div #zipcode class="zipcode">
+      <label><b>Zipcode:</b> {{user?.zipcode}} </label>
+      <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
+    </div>
+  
+  <!--
+    <div class = "events" contenteditable="true">
+     <p><b>Events signed up for:</b> <i class="fas fa-edit"></i></p>                   
+    </div>
+  -->
   </div>
-
-  <div #description class="bio">
-    <label><b>Email:</b> {{user?.email}} </label>
-    <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
-  </div>
-
-  <div #zipcode class="zipcode">
-    <label><b>Zipcode:</b> {{user?.zipcode}} </label>
-    <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
-  </div>
-
-<!--
-  <div class = "events" contenteditable="true">
-   <p><b>Events signed up for:</b> <i class="fas fa-edit"></i></p>                   
-  </div>
--->
-</div>
+  

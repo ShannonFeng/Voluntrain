@@ -1,18 +1,19 @@
 <div class="container" style="">
-  <mat-card *ngIf="event">
-    <h6>Event: {{ event.event_name }}</h6>
-    <p>Description: {{ event.description }}</p>
-    <p>Sign Up List: {{ event.signUpList }}</p>
-  </mat-card>
-</div>
-
-<button class="button" mat-button (click)="dialog.openDialog()">Sign Up</button>
-
-<h6>Event Location</h6>
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<div>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
-</div>
+    <mat-card *ngIf="event">
+      <h6>Event: {{ event.event_name }}</h6>
+      <p>Description: {{ event.description }}</p>
+      <p>Sign Up List: {{ event.signUpList }}</p>
+    </mat-card>
+  </div>
+  
+  <button class="button" mat-button (click)="dialog.openDialog()">Sign Up</button>
+  
+  <h6>Event Location</h6>
+  <!-- this creates a google map on the page with the given lat/lng from -->
+  <!-- the component as the initial center of the map: -->
+  <div>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  </div>
+  

@@ -3,4 +3,6 @@ export class Event {
   event_name: String;
   description: String;
   signUpList: String[];
+  lat: number;
+  long: number;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
 import {MediaMatcher} from '@angular/cdk/layout';
@@ -24,8 +24,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   email: String = "";
   zipcode: Number = 0;
   
-  results: Array<Object> = [];
+  results: Array<evnt> = [];
+  markers: marker[] = [];
 
+	 
 
   lat = 43.0746953;
   lng = -89.3841695;
@@ -34,12 +36,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   getLocation(): void{
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
+          this.markers[0] = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            label: 'You',
+          };
+          
           this.lng = position.coords.longitude;
           this.lat = position.coords.latitude;
         });
     } else {
-       this.lng =-89.3841695;
-       this.lat =43.0746953;
+      this.markers[0] = {
+       lng: -89.3841695,
+       lat: 43.0746953,
+      };
+      this.lat = 43.0746953;
+      this.lng = -89.3841695;
     }
   }
 
@@ -52,7 +64,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     
   }
 
-  
+  mapClicked() {
+    console.log(this.results.length);
+
+    for(var i = 0; i <this.results.length; i++){
+      console.log(this.results[i].lat);
+      console.log(this.results[i].long);
+      console.log(this.results[i].event_name);
+
+      this.markers.push({
+        lat: this.results[i].lat,
+        lng: this.results[i].long,
+        label: this.results[i].event_name,
+    });
+  }
+  }
+
   ngOnInit() {
     this.getLocation();
     this.user.getData().subscribe(data => {
@@ -78,6 +105,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (input != "") {
       this.eventService.searchEvents(input).subscribe(result => {
         this.results = result;
+        console.log("here");
+        this.mapClicked();
       });
     }
     else {
@@ -85,8 +114,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     
   }
-
+  
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+}
+interface marker {
+	lat: number;
+	lng: number;
+	label?: String;
+}
+interface evnt {
+  _id: String;
+  event_name: String;
+  description: String;
+  signUpList: String[];
+  lat: number;
+  long: number;
 }
