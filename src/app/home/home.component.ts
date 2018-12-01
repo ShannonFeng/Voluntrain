@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.lat = position.coords.latitude;
         });
     } else {
-       console.log("No support for geolocation");
        this.lng =-89.3841695;
        this.lat =43.0746953;
     }

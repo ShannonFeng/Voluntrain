@@ -1,5 +1,6 @@
 export class Event {
-  id: number;
-  name: string;
-  participant: string[];
+  _id: String;
+  event_name: String;
+  description: String;
+  signUpList: String[];
 }

@@ -1,33 +1,16 @@
-<h1>Event Name</h1>
-<label id="testid" mat-raised-button href="javascript:void(0);">view event</label>
+<mat-card>
+  <h6>Event: {{ (event | async).event_name }}</h6>
+  <p>Description: {{ (event | async).description }}</p>
+  <p>Sign Up List: {{ (event | async).signUpList }}</p>
+</mat-card>>
 
-<h1>Organization </h1>
-<label id="testid2" mat-raised-button href="javascript:void(0);">Organization</label>
+<button class="button" mat-button (click)="dialog.openDialog()">Sign Up</button>
 
-<h1>Event Description</h1>
-<label id="demo" mat-raised-button href="javascript:void(0);">description box</label>
-
-
-
-<button class="button" mat-button (click)="dialog.openDialog()">Join Event</button>
-
-<h1>Event Location</h1>
+<h6>Event Location</h6>
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <div>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-
 </agm-map>
-
-</div>
-
-<div *ngIf="event">
-  <h2>Event Details</h2>
-  <div><span>id: </span>{{event.id}}</div>
-  <div>
-    <label>Name: {{event.name}}</label>
-  </div>
-  <button (click)="signUp()">Sign Up</button>
-
 </div>

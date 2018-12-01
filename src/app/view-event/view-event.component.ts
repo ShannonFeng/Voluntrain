@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from '../event.service';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Event } from '../event';
 
 @Component({
   selector: 'app-view-event',
@@ -7,15 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewEventComponent implements OnInit {
 
+  event: Event;
   lat = 43.0746953;
   lng = -89.3841695;
   zoom = 14;
   
-  constructor() { }
-
-  eventName;
-  address;
-  volunteers;
+  constructor(private eventsService : EventService, private activatedRoute: ActivatedRoute) { }
 
   getLocation(): void{
     if (navigator.geolocation) {
@@ -31,11 +32,10 @@ export class ViewEventComponent implements OnInit {
   }
   ngOnInit() {
     this.getLocation();
-    this.eventName = "Event1";
-    this.address = "1234"; 
-    this.volunteers = ["Bob", "Catherine", "Dan"];
+    var id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.eventsService.getEvent(id).subscribe(result => {
+      this.event = result;
+    });
   }
-
-
 
 }
