@@ -138,11 +138,6 @@ import {
     MatTooltipModule,
     MatTreeModule,
   ],
-  entryComponents: [
-    DialogComponent,
-    DialogComponentDialog
-
-  ],
   providers: [
     UserService,
     AuthService,
@@ -156,6 +151,7 @@ import {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    DialogComponent,
     DialogComponentDialog
   ]
 })
