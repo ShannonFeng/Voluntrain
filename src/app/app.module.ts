@@ -154,7 +154,10 @@ import {
     EventService,
     NavbarComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogComponentDialog
+  ]
 })
 
 export class AppModule {

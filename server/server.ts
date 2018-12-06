@@ -154,6 +154,13 @@ app.post('/api/login', (req, res) => {
   });
 })
 
+app.post('/api/event', (req, res) => {
+  var id = req.body.id;
+  queries.getEventInfo(id, function(result) {
+    res.json(result);
+  })
+})
+
 app.post('/api/search', (req, res) => {
   var input = req.body.input;
   queries.searchEvents(input, function(results) {

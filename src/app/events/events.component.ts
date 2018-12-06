@@ -17,7 +17,7 @@ export class EventsComponent implements OnInit {
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    this.getEvents();
+    //this.getEvents();
   }
 
   onSelect(event: Event): void{
@@ -25,8 +25,8 @@ export class EventsComponent implements OnInit {
   }
 
   getEvents(): void{
-    this.eventService.getEvents()
-      .subscribe(events => this.events = events);
+    //this.eventService.getEvents()
+      //.subscribe(events => this.events = events);
   }
 
 }

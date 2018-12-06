@@ -26,6 +26,18 @@ function connectToDb(callback) {
     }
 }
 
+module.exports.getEventInfo = function(id, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var o_id = new mongo.ObjectID(id);
+        var query = { _id: o_id }    
+        db.collection("Events").find(query).toArray((err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    }) 
+}
+
 module.exports.searchEvents = function(input, callback) {
     connectToDb(() => {
         var query = { event_name: { $regex: input, $options: 'i' } }    // 'i' option means case insensitive

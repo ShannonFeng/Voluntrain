@@ -24,15 +24,9 @@
 // }
 
 import { Component, OnInit } from '@angular/core';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import{ DialogComponent} from '../dialog/dialog.component';
+import { EventService } from '../event.service';
 import { ActivatedRoute } from '@angular/router';
-
-import { Event }         from '../event';
-import { EventService }  from '../event.service';
-import { UserService}    from '../user.service';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-view-event',
@@ -42,10 +36,25 @@ import { Router } from '@angular/router';
 
 export class ViewEventComponent implements OnInit {
 
-  event: Event;
+  event;
+
   lat = 43.0746953;
   lng = -89.3841695;
   zoom = 14;
+  
+  constructor(private eventsService : EventService, private activatedRoute: ActivatedRoute, private dialog:DialogComponent) { }
+
+  ngOnInit() {
+    this.getLocation();
+    this.getEventInfo();
+  }
+
+  getEventInfo() {
+    var id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.eventsService.getEvent(id).subscribe(result => {
+      this.event = result[0];
+    });
+  }
 
   getLocation(): void{
     if (navigator.geolocation) {
@@ -59,58 +68,5 @@ export class ViewEventComponent implements OnInit {
        this.lat =43.0746953;
     }
   }
-  constructor(
-    private route: ActivatedRoute,
-    private eventService: EventService,
-    private userService: UserService,
-    private auth:AuthService,
-    private router:Router,
-    private dialog: DialogComponent
-  ) {
-  }
 
-  getEvent(): void{
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.eventService.getEvent(id)
-      .subscribe(event => this.event = event);
-  }
-
-  signUp() {
-    this.userService.getData().subscribe((data) => {
-      var isLoggedIn = data.isLoggedIn;
-      if (isLoggedIn) {
-        var email = data.email;
-        var eventId = this.event.id;
-        this.auth.signUp(email, eventId).subscribe(data => {
-          if (data.success) {
-            this.router.navigate(['/']);
-          }
-          window.alert(data.message);
-        });
-      }
-      else {
-        window.alert("Unable to sign up for event. No user is logged in.");
-      }
-    })
-  }
-
-  /*
-  signUp(): void{
-    const id = +this.route.snapshot.paramMap.get('id');
-    // this.eventService.addParticipant('some@email.com')
-    //   .subscribe( event => {
-    //     this.event.participant.push('some@email.com')
-    //   });
-    // this.userService.addEvent(id)
-    //   .subscribe( user => {
-    //     this.user.eventSignedUp.push(id)
-    // });
-  }
-  */
-
-  ngOnInit() {
-    this.getLocation();
-    this.getEvent();
-    console.log(this.lat,this.lng);
-  }
 }

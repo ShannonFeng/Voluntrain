@@ -1,19 +1,21 @@
 <h1> Sign Up</h1>
 
 <div>
-    <form>
-        <label for="name">name</label>
-        <input type="text" id="name" name="firstname" placeholder="First Name Last Name">
+    <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" id="name" name="name" placeholder="First Name Last Name" required formControlName="name">
+            
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="example@wisc.edu" required formControlName="email">
+            
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" required formControlName="password">
+            
+            <label for="zipcode">Zip Code</label>
+            <input type="text" id="zipcode" name="zipcode" placeholder="00000" required formControlName="zipcode">
         
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="example@wisc.edu">
-        
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" placeholder="">
-        
-        <label for="zipcode">Zip Code</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="00000">
-    
-        <input type="submit" value="Sign up">
+            <input type="submit" value="Sign up">
+        </div>
     </form>
 </div>

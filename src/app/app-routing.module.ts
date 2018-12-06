@@ -17,7 +17,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: UserProfileComponent},
+  { path: '', component: HomeComponent},
   { path: 'myProfile', component: UserProfileComponent},
   { path: 'login', component: UserLoginFormComponent},
   { path: 'logout', component: LogoutComponent},
@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'organizations/:id', component:ViewOrgComponent},
   { path: 'create-event', component: CreateEventComponent},
   { path: 'events', component: EventsComponent},
+  { path: 'search', component: SearchPageComponent},
   { path: 'events-details/:id', component: ViewEventComponent}
 ];
 

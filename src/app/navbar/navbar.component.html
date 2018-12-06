@@ -4,8 +4,8 @@
     <!--
     <li class="search"><input type="text" placeholder="Search..."></li>
     -->
-
-    <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/myProfile">My profile</a></li>
+  
+    <li class="pagelink" *ngIf="(isLoggedIn$ | async)" style="float:right"><a routerLink="/myProfile">My profile</a></li>
     <li class="pagelink" *ngIf="isLoggedIn$ | async" style="float:right"><a routerLink="/logout">Sign Out</a></li>
     <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/login">Log In</a></li>
     <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/create-account">Create Account</a></li>

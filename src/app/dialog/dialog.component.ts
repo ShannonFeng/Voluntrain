@@ -1,5 +1,6 @@
-import {Component, Inject} from '@angular/core';
+import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'dialog',
@@ -7,8 +8,22 @@ import {MatDialog} from '@angular/material';
     styleUrls: ['dialog.component.css'],
   })
   export class DialogComponent {
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog, private formBuilder: FormBuilder) {
         //setTimeout(() => this.dialog.open(DialogComponentDialog))
+    }
+
+    signUpForm;   // will be used for FormGroup instance
+
+    ngOnInit() {
+      this.signUpForm = this.formBuilder.group({
+        name: this.formBuilder.control('', Validators.required),
+        email: this.formBuilder.control('', Validators.compose([
+          Validators.required,
+          Validators.email
+        ])),
+        password: this.formBuilder.control('', Validators.required),
+        zipcode: this.formBuilder.control('', Validators.required)
+      });
     }
     
     openDialog() {
@@ -17,6 +32,10 @@ import {MatDialog} from '@angular/material';
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
+    }
+
+    submit() {
+      console.log(this.signUpForm.name.value);
     }
   } 
 
