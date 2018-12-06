@@ -65,13 +65,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   mapClicked() {
-    console.log(this.results.length);
 
     for(var i = 0; i <this.results.length; i++){
-      console.log(this.results[i].lat);
-      console.log(this.results[i].long);
-      console.log(this.results[i].event_name);
-
       this.markers.push({
         lat: this.results[i].lat,
         lng: this.results[i].long,
@@ -105,7 +100,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (input != "") {
       this.eventService.searchEvents(input).subscribe(result => {
         this.results = result;
-        console.log("here");
         this.mapClicked();
       });
     }
