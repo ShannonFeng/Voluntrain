@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ActivatedRoute } from '@angular/router';
 
 import { Org } from '../org';
@@ -8,7 +7,6 @@ import { Event }         from '../event';
 import { EventService }  from '../event.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-view-org',
@@ -29,17 +27,12 @@ export class ViewOrgComponent implements OnInit {
 
   ngOnInit() {
     this.getOrgByID();
-    this.getEvents();
   }
 
   getOrgByID(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.orgService.getOrgByID(id)
       .subscribe(org => this.org = org);
-  }
-  getEvents(): void{
-    this.eventService.getEvents()
-      .subscribe(events => this.events = events);
   }
 
   //todo: redirect to createEvent form component...
