@@ -5,7 +5,9 @@ interface userData {
   isLoggedIn: boolean,
   name: string
   email: string,
-  zipcode: Number
+  zipcode: Number,
+  description: string,
+  interests: string
 }
 
 @Injectable()

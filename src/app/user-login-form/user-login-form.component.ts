@@ -39,7 +39,7 @@ export class UserLoginFormComponent {
       if (data.success) {
         this.auth.setLoggedIn(true);
         this.router.navigate(['/']);  // redirect to home on successful login
-        this.navbar.ngOnInit;
+        this.navbar.ngOnInit();
       } else {
         window.alert(data.message);   // otherwise display error msg to user
       }

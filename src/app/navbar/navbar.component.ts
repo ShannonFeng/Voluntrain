@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>; 
+  isLoggedIn$; 
 
   constructor(private auth:AuthService) { }
 
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn$ = this.auth.isLoggedIn;
   }
 
-  onLogout(){
+  onLogout() {
     this.auth.logout();
   }
  

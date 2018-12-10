@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 interface loginResult {
   success: boolean,
@@ -31,7 +31,7 @@ interface eventSignUpResult {
 })
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http:HttpClient) { }
 
@@ -39,8 +39,12 @@ export class AuthService {
     this.loggedIn.next(value);
   }
 
-  get isLoggedIn() {
+  get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  getLoginStatus(): Observable<boolean>{
+    return this.http.get<boolean>("/api/loginstatus");
   }
 
   login(email, password) {

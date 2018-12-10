@@ -42,11 +42,11 @@ MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
 app.post('/api/signup', function(req, res) {
   var email = req.body.email;
   var eventId = req.body.eventId;
-  console.log(email);
-  console.log(eventId);
-  res.json({
-    success: true,
-    message: "Event sign up clicked."
+  queries.signUp(email, eventId, () => {
+    res.json({
+      success: true,
+      message: "Event sign up clicked."
+    })
   })
 })
 
@@ -168,6 +168,16 @@ app.post('/api/search', (req, res) => {
   })
 })
 
+app.get('/api/loginstatus', (req, res) => {
+  // if the session is defined, return true as the login status
+  if (req.session.email) {
+    res.send(true);
+  }
+  else {
+    res.send(false);
+  }
+})
+
 app.get('/api/userdata', (req, res) => {
   var email = req.session.email;
   queries.checkUserExists(email, function(userExists) {
@@ -179,7 +189,9 @@ app.get('/api/userdata', (req, res) => {
               isLoggedIn: true,
               name: result.name,
               email: result.email,
-              zipcode: result.zipcode
+              zipcode: result.zipcode,
+              description: result.description,
+              interests: result.interests
             })
         })
     }
@@ -198,3 +210,7 @@ app.post('/api/logout', (req, res) => {
     req.session.destroy();
     res.json({success: true});
 })
+
+app.get('/*', (req, res) => {
+  res.sendFile('index.html', { root: './dist/Voluntrain/' });
+});

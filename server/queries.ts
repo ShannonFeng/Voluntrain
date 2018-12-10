@@ -26,14 +26,31 @@ function connectToDb(callback) {
     }
 }
 
+module.exports.signUp = function(email, eventId, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var o_id = new mongo.ObjectID(eventId);
+        var query = { _id: o_id };
+        this.getEventInfo(eventId, info => {
+            var signUpList = info.signUpList;
+            signUpList.push(email);
+            var newData = { $set: { signUpList: signUpList }};    
+            db.collection("Events").updateOne(query, newData, function(err) {
+                if (err) throw err;
+                callback();
+            });
+        })        
+    }) 
+}
+
 module.exports.getEventInfo = function(id, callback) {
     connectToDb(() => {
         var mongo = require('mongodb');
         var o_id = new mongo.ObjectID(id);
         var query = { _id: o_id }    
-        db.collection("Events").find(query).toArray((err, results) => {
+        db.collection("Events").find(query).toArray((err, result) => {
             if (err) throw err;
-            callback(results);
+            callback(result[0]);
         });
     }) 
 }
@@ -122,7 +139,9 @@ module.exports.getUserInfo = function(email, callback) {
             var info = {
                 name: result[0].name,
                 email: result[0].email,
-                zipcode: result[0].zipcode
+                zipcode: result[0].zipcode,
+                description: result[0].description,
+                interests: result[0].interests
             };
             callback(info);
         });

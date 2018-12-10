@@ -1,10 +1,8 @@
+
+<!--
 <div style="margin-bottom: 80px">
     <ul>
     <li class = "icon"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></li>
-    <!--
-    <li class="search"><input type="text" placeholder="Search..."></li>
-    -->
-  
     <li class="pagelink" *ngIf="(isLoggedIn$ | async)" style="float:right"><a routerLink="/myProfile">My profile</a></li>
     <li class="pagelink" *ngIf="isLoggedIn$ | async" style="float:right"><a routerLink="/logout">Sign Out</a></li>
     <li class="pagelink" *ngIf="!(isLoggedIn$ | async)" style="float:right"><a routerLink="/login">Log In</a></li>
@@ -12,3 +10,28 @@
     <li class="pagelink" *ngIf="(isLoggedIn$ | async)" style="float:right"><a routerLink="/create-org">Create an Organization</a></li>
     </ul>
 </div>
+-->
+<mat-toolbar class="navbar" color="primary">
+    <mat-toolbar-row>
+        <span><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></span>
+        <span class="spacer"></span>
+        <button class="navbar-btn" routerLink="/create-account" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Create Account</button>
+        <button class="navbar-btn" routerLink="/logout" *ngIf="(isLoggedIn$ | async)" mat-raised-button color="accent">Logout</button>
+        <button class="navbar-btn" routerLink="/login" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Login</button>
+        <span *ngIf="(isLoggedIn$ | async)">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>reorder</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button routerLink="/myProfile" mat-menu-item>
+                    <mat-icon>person</mat-icon>
+                    <span>My Profile</span>
+                </button>
+                <button routerLink="/create-org" mat-menu-item>
+                    <mat-icon>business</mat-icon>
+                    <span>Register an Organization</span>
+                </button>
+            </mat-menu>
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
