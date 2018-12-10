@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     else {
       this.results = [];
     }
-    
   }
 
   ngOnDestroy(): void {

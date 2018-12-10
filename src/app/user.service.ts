@@ -18,13 +18,4 @@ export class UserService {
   getData() {
     return this.http.get<userData>('/api/userdata');
   }
-
-  private userUrl = 'api/user'
-
-  // parse event id to User's event list
-  // addEvent(id: number): void{
-  //   var events = this.user.eventSignedUp;
-  //   events.push(id);
-  //
-  // }
 }

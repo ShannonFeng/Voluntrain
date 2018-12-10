@@ -43,10 +43,6 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  getLoginStatus(): Observable<boolean>{
-    return this.http.get<boolean>("/api/loginstatus");
-  }
-
   login(email, password) {
     // post login credentials to API server and return user info if correct
     return this.http.post<loginResult>("/api/login", {email, password});
