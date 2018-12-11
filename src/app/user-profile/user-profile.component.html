@@ -10,7 +10,23 @@
         <p>{{user?.interests}}</p>
       </div>
       <div class="col-md-6">
-        
+        <div *ngIf="userEvents" class="container">
+          <h6><b>Events I'm currently signed up for...</b></h6>
+          <span *ngFor="let event of userEvents">
+            <li>
+              <a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a>
+            </li>
+          </span>
+        </div>
+        <div *ngIf="user?.isOrgAdmin" class="container">
+          <hr>
+          <h6><b>My Organizations:</b></h6>
+          <span *ngFor="let org of userOrgs">
+            <li>
+                <a [routerLink]="['/org-profile', org._id]">{{ org.name }}</a>
+            </li>
+          </span>
+        </div>
       </div>
     </div>
   </mat-card>

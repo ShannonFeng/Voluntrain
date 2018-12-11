@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router, private auth: AuthService) { 
+  constructor(private router: Router, private auth: AuthService, private user: UserService) { 
     
   }
 
@@ -18,6 +19,7 @@ export class LogoutComponent implements OnInit {
       if(data.success) {
         this.router.navigate(['/']);
         this.auth.setLoggedIn(false);
+        this.user.setUser(false);
       } else {
         window.alert('A problem occured while logging out.')
       }

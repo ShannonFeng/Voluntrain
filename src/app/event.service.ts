@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Event } from './event';
 
@@ -11,11 +11,11 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   searchEvents(input) {
-    return this.http.post<Event[]>("/api/search", {input});
+    return this.http.post<Event[]>("/api/search", { input });
   }
 
   getEvent(id) : Observable<Event>{
-    return this.http.post<Event>("/api/event", {id});
+    return this.http.post<Event>("/api/event", { id });
   }
 
 }

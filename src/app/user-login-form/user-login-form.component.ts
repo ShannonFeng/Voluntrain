@@ -38,6 +38,9 @@ export class UserLoginFormComponent {
     this.auth.login(email, password).subscribe(data => {
       if (data.success) {
         this.auth.setLoggedIn(true);
+        this.user.getData().subscribe(userData => {
+          this.user.setUser(userData);
+        });
         this.router.navigate(['/']);  // redirect to home on successful login
         this.navbar.ngOnInit();
       } else {

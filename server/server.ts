@@ -42,11 +42,13 @@ MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
 app.post('/api/signup', function(req, res) {
   var email = req.body.email;
   var eventId = req.body.eventId;
-  queries.signUp(email, eventId, () => {
-    res.json({
-      success: true,
-      message: "Event sign up clicked."
-    })
+  queries.signUp(email, eventId, (isSuccessful) => {
+    if (isSuccessful) {
+      res.json({ success: true, message: "Successfully added user to event." });
+    }
+    else {
+      res.json({ success: false, message: "Unable to sign up. User already on sign up list." });
+    }
   })
 })
 
@@ -62,7 +64,8 @@ app.post('/api/createAccount/', function (req, res) {
         zipcode: req.body.zipcode, 
         password: req.body.password,
         description: req.body.description,
-        interests: req.body.interests
+        interests: req.body.interests,
+        isOrgAdmin: false     // default
       }
       queries.createNewUser(newUserInfo, () => {
         console.log("Successfully added user to database.");
@@ -97,11 +100,13 @@ app.post('/api/createOrg', (req, res) => {
       if (!orgExists) {
         // Insert the organization info into db
         queries.createNewOrg(orgInfo, () => {
-          console.log("Successfully added organization to database.");
-          res.json({
-            success: true,
-            message: "Successfully created organization."
-          });
+          queries.setUserToAdmin(req.session.email, () => {
+            console.log("Successfully added organization to database.");
+            res.json({
+              success: true,
+              message: "Successfully created organization."
+            });
+          })
         })
       }
       // Otherwise if org already exists, return error message
@@ -161,6 +166,13 @@ app.post('/api/event', (req, res) => {
   })
 })
 
+app.post('/api/org', (req, res) => {
+  var orgId = req.body.orgId;
+  queries.getOrgInfo(orgId, function(results) {
+    res.json(results);
+  })
+})
+
 app.post('/api/search', (req, res) => {
   var input = req.body.input;
   queries.searchEvents(input, function(results) {
@@ -168,14 +180,25 @@ app.post('/api/search', (req, res) => {
   })
 })
 
-app.get('/api/loginstatus', (req, res) => {
-  // if the session is defined, return true as the login status
-  if (req.session.email) {
-    res.send(true);
-  }
-  else {
-    res.send(false);
-  }
+app.get('/api/userorgs', (req, res) => {
+  var email = req.session.email;
+  queries.getUserOrgs(email, (results) => {
+    res.json(results);
+  })
+})
+
+app.get('/api/userevents', (req, res) => {
+  var email = req.session.email;
+  queries.getAllUserEvents(email, (results) => {
+    res.json(results);
+  })
+})
+
+app.post('/api/orgevents', (req, res) => {
+  var orgId = req.body.orgId;
+  queries.getAllOrgEvents(orgId, (results) => {
+    res.json(results);
+  })
 })
 
 app.get('/api/userdata', (req, res) => {
@@ -191,7 +214,8 @@ app.get('/api/userdata', (req, res) => {
               email: result.email,
               zipcode: result.zipcode,
               description: result.description,
-              interests: result.interests
+              interests: result.interests,
+              isOrgAdmin: result.isOrgAdmin
             })
         })
     }

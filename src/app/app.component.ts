@@ -14,6 +14,7 @@ export class AppComponent {
   ngOnInit() {
     this.user.getData().subscribe(data => {
       if(data.isLoggedIn) {
+        this.user.setUser(data);
         this.auth.setLoggedIn(true);
         console.log(data.name + " is currently logged in.");
       } 

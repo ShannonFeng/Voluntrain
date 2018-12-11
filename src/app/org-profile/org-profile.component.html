@@ -1,0 +1,51 @@
+<div class="org-profile-container">
+  <mat-card *ngIf="org">
+    <mat-card-title>{{ org.name }}</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-grid-list cols="3">
+        <mat-grid-tile [colspan]="1">
+          <div class="grid-content">
+            <div>
+              <h6><b>About</b></h6>
+              <mat-icon>description</mat-icon><span class="icon-aligned">{{ org.bio }}</span>
+              <hr/>
+            </div>
+            <div>
+              <h6><b>Location</b></h6>
+              <mat-icon>place</mat-icon><span class="icon-aligned">{{ org.location }}</span>
+              <hr/>
+            </div>
+            <div>
+              <h6><b>Primary Contact</b></h6>
+              <mat-icon>phone</mat-icon><span class="icon-aligned">{{ org.admin }}</span>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+          <div class="grid-content">
+            <h6><b>Current Events</b></h6>
+            <div>
+              <mat-list>
+                <span *ngFor="let event of org_events">
+                  <div class="list-item">
+                    <h6><a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a></h6>
+                    <p><b>Description: </b>{{ event.description }}</p>
+                  </div>
+                  <mat-divider></mat-divider>
+                </span>
+              </mat-list>
+            </div>
+          </div>
+          <button *ngIf="userIsOrgAdmin" mat-raised-button color="accent">Create a new event</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-footer>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card-footer>
+  </mat-card>
+</div>

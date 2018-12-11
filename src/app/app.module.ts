@@ -27,8 +27,9 @@ import { DialogComponentDialog } from './dialog/dialog.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SearchPageComponent } from './search-page/search-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+
+import 'hammerjs';  // Import hammer.js for gesture support with Angular Material
 
 // Angular Material imports:
 import {
@@ -68,6 +69,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { OrgProfileComponent } from './org-profile/org-profile.component';
 
 @NgModule({
   declarations: [
@@ -83,8 +85,8 @@ import {
     DialogComponent,
     DialogComponentDialog,
     CreateEventComponent,
-    SearchPageComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    OrgProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

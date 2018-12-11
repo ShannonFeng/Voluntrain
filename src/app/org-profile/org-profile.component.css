@@ -1,0 +1,27 @@
+.org-profile-container {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.grid-content {
+    position: absolute;
+    top: 18px;
+    left: 6px;
+    width:92%;
+}
+
+.list-item {
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:6px;
+    border-radius: 5px;    /* allows for rounded corners */
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.12);
+    margin-bottom: 10px;
+}
+
+.icon-aligned {
+    position: relative;
+    top: -5px;
+    margin-left: 5px; /* optional */
+}

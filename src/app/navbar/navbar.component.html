@@ -13,11 +13,12 @@
 -->
 <mat-toolbar class="navbar" color="primary">
     <mat-toolbar-row>
-        <span><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></span>
+        <span style="margin-right:10px"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></span>
+        <button class="navbar-btn" routerLink="/" mat-raised-button color="accent">Home</button>  
         <span class="spacer"></span>
-        <button class="navbar-btn" routerLink="/create-account" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Create Account</button>
-        <button class="navbar-btn" routerLink="/logout" *ngIf="(isLoggedIn$ | async)" mat-raised-button color="accent">Logout</button>
+        <button class="navbar-btn" routerLink="/create-account" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Create Account</button>  
         <button class="navbar-btn" routerLink="/login" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Login</button>
+        <button class="navbar-btn" routerLink="/myProfile" *ngIf="(user$ | async)" mat-stroked-button>{{ (user$ | async).name }}</button>
         <span *ngIf="(isLoggedIn$ | async)">
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>reorder</mat-icon>
@@ -25,11 +26,15 @@
             <mat-menu #menu="matMenu">
                 <button routerLink="/myProfile" mat-menu-item>
                     <mat-icon>person</mat-icon>
-                    <span>My Profile</span>
+                    <span>My Dashboard</span>
                 </button>
                 <button routerLink="/create-org" mat-menu-item>
                     <mat-icon>business</mat-icon>
                     <span>Register an Organization</span>
+                </button>
+                <button routerLink="/logout" mat-menu-item>
+                    <mat-icon>logout</mat-icon>
+                    <span>Logout</span>
                 </button>
             </mat-menu>
         </span>

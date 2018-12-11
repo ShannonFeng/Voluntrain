@@ -37,7 +37,7 @@ export class ViewEventComponent implements OnInit {
     });
   }
 
-  getLocation(): void{
+  getLocation(): void {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
           this.lng = position.coords.longitude;
@@ -56,8 +56,8 @@ export class ViewEventComponent implements OnInit {
         this.user.getData().subscribe(info => {
           var email = info.email;
           this.auth.signUp(email, this.eventId).subscribe(result => {
-            window.alert("Successfully signed up for event!")
-            //this.ngOnInit();
+            window.alert(result.message)
+            this.ngOnInit();
           })
         });
       }

@@ -26,6 +26,28 @@ function connectToDb(callback) {
     }
 }
 
+module.exports.getUserOrgs = function(email, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var query = { admin: email };
+        db.collection("Organizations").find(query).toArray((err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    })
+}
+
+module.exports.getAllUserEvents = function(email, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var query = { signUpList: email };
+        db.collection("Events").find(query).toArray((err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    })
+}
+
 module.exports.signUp = function(email, eventId, callback) {
     connectToDb(() => {
         var mongo = require('mongodb');
@@ -33,12 +55,17 @@ module.exports.signUp = function(email, eventId, callback) {
         var query = { _id: o_id };
         this.getEventInfo(eventId, info => {
             var signUpList = info.signUpList;
-            signUpList.push(email);
-            var newData = { $set: { signUpList: signUpList }};    
-            db.collection("Events").updateOne(query, newData, function(err) {
-                if (err) throw err;
-                callback();
-            });
+            if (signUpList.includes(email)) {
+                callback(false);
+            }
+            else {
+                signUpList.push(email);
+                var newData = { $set: { signUpList: signUpList }};    
+                db.collection("Events").updateOne(query, newData, function(err) {
+                    if (err) throw err;
+                    callback(true);
+                });
+            }
         })        
     }) 
 }
@@ -74,6 +101,18 @@ module.exports.createNewUser = function(userInfo, callback) {
     })
     connectToDb(() => {
         db.collection("Users").insertOne(userInfo, function(err, result) {
+            if (err) throw err;
+            callback();
+        });
+    })
+}
+
+// Sets the "isOrgAdmin" field to true for the given user
+module.exports.setUserToAdmin = function(email, callback) {
+    connectToDb(() => {
+        var query = { email: email };
+        var newData = { $set: { isOrgAdmin: true }};    
+        db.collection("Users").updateOne(query, newData, function(err) {
             if (err) throw err;
             callback();
         });
@@ -141,7 +180,8 @@ module.exports.getUserInfo = function(email, callback) {
                 email: result[0].email,
                 zipcode: result[0].zipcode,
                 description: result[0].description,
-                interests: result[0].interests
+                interests: result[0].interests,
+                isOrgAdmin: result[0].isOrgAdmin
             };
             callback(info);
         });
@@ -168,13 +208,37 @@ module.exports.checkOrgExists = function(orgName, callback) {
 // Inserts a new organization into db
 module.exports.createNewOrg = function(orgInfo, callback) {
     connectToDb(() => {
-        db.collection("Organizations").insertOne(orgInfo, function(err, result) {
+        db.collection("Organizations").insertOne(orgInfo, function(err) {
             if (err) throw err;
             callback();
         });
     })
 }
 
+module.exports.getOrgInfo = function(orgId, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var o_id = new mongo.ObjectID(orgId);
+        var query = { _id: o_id }    
+        db.collection("Organizations").find(query).limit(1).toArray((err, result) => {
+            if (err) throw err;
+            callback(result[0]);
+        });
+    }) 
+}
+
+module.exports.getAllOrgEvents = function(orgId, callback) {
+    connectToDb(() => {
+        var mongo = require('mongodb');
+        var query = { org_id: orgId }    
+        db.collection("Events").find(query).toArray((err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    }) 
+}
+
+/*
 // Returns all information about the org with specified orgName
 module.exports.getOrgInfo = function(orgName, callback) {
     var query = { name: orgName };
@@ -185,6 +249,7 @@ module.exports.getOrgInfo = function(orgName, callback) {
         }) 
     })
 }
+*/
 
 // Deletes (only one instance of) the organization with the specified name
 module.exports.deleteOrg = function(orgName, callback) {

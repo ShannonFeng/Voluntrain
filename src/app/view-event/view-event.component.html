@@ -1,21 +1,21 @@
 <div class="container" style="text-align:left">
   <div class="row">
     <div class="col-md-6">
-      <mat-card>
+      <mat-card *ngIf="event">
           <mat-card-header>
             <div mat-card-avatar class="card-avatar"></div>
             <mat-card-title>{{event?.event_name}}</mat-card-title>
-            <mat-card-subtitle>Organized by {{event?.org_id}}</mat-card-subtitle>
+            <mat-card-subtitle>Organized by <a [routerLink]="['/org-profile', event.org_id]">{{event.org_name}}</a></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p><b>Description: </b>{{event?.description}}</p>
+            <p><b>Description: </b>{{event.description}}</p>
             <hr/>
-            <p><b>Volunteers signed up: </b>{{event?.signUpList.length}}</p>
+            <p><b>Volunteers signed up: </b>{{event.signUpList.length}}</p>
             <p><b>Volunteers needed: </b>15</p>
             <hr/>
           </mat-card-content>
-          <mat-card-actions style="text-align: center">
-            <button (click)="signUp()" mat-raised-button color="primary">Sign Up</button>
+          <mat-card-actions style="text-align:center; padding-bottom:8px">
+            <button (click)="signUp()" mat-raised-button color="accent">Sign Up</button>
           </mat-card-actions>
       </mat-card>
     </div>

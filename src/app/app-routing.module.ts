@@ -4,14 +4,15 @@ import { RouterModule, Routes }  from '@angular/router';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { HomeComponent } from './home/home.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { CreateEventComponent } from './create-event/create-event.component';
 import { OrgFormComponent } from './org-form/org-form.component';
 import { EventsComponent} from './events/events.component';
 import { ViewEventComponent} from './view-event/view-event.component';
 import { LogoutComponent } from './logout/logout.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogComponentDialog } from './dialog/dialog.component';
-import { SearchPageComponent } from './search-page/search-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { OrgProfileComponent } from './org-profile/org-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -20,9 +21,10 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent},
   { path: 'create-account', component: CreateaccountComponent},
   { path: 'create-org', component: OrgFormComponent},
+  { path: 'create-event/:orgId/:orgName', component: CreateEventComponent},
   { path: 'events', component: EventsComponent},
-  { path: 'search', component: SearchPageComponent},
-  { path: 'events-details/:id', component: ViewEventComponent}
+  { path: 'events-details/:id', component: ViewEventComponent},
+  { path: 'org-profile/:id', component: OrgProfileComponent }
 ];
 
 @NgModule({
