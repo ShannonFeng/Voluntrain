@@ -205,6 +205,19 @@ module.exports.checkOrgExists = function(orgName, callback) {
     });
 };
 
+// Inserts a new event into db
+module.exports.createEvent = function(eventInfo, callback) {
+    connectToDb(() => {
+        db.collection("Events").insertOne(eventInfo, function(err) {
+            if (err) {
+                callback({ success: false, message: "Unable to create event." })
+                throw err;
+            }
+            callback({ success: true, message: "Successfully created event!" });
+        });
+    })
+}
+
 // Inserts a new organization into db
 module.exports.createNewOrg = function(orgInfo, callback) {
     connectToDb(() => {

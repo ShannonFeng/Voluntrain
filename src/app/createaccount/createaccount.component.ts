@@ -40,7 +40,7 @@ export class CreateaccountComponent implements OnInit {
     var zipcode = this.signupForm.value.zipcode;
     var password = this.signupForm.value.password;
     var description = this.signupForm.value.description;
-    var interests = this.signupForm.value.description;
+    var interests = this.signupForm.value.interests;
 
     this.auth.createAccount(name, email, zipcode, password, description, interests).subscribe(data => {
       if (data.success) {

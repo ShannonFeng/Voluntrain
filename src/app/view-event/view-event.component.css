@@ -6,10 +6,12 @@ agm-map {
     z-index: 1;
 }
 
-.card-avatar {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.avatar {
+    /*background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');*/
+    background-image: url('../default-pic.jpg');
     background-size: cover;
-  }
+    display: inline;
+}
 /*
 #testid {display: block;
     color: rgb(12, 1, 1);

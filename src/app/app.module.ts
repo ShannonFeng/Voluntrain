@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { FlexLayoutModule } from "@angular/flex-layout";
 import 'hammerjs';  // Import hammer.js for gesture support with Angular Material
 
 // Angular Material imports:
@@ -99,6 +100,7 @@ import { OrgProfileComponent } from './org-profile/org-profile.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA8A-n9JeSALtz5cXQp_dLqn22gPnyDu4c'
     }),
+    FlexLayoutModule, 
     // Angular Material imports:
     MatAutocompleteModule,
     MatBadgeModule,

@@ -11,23 +11,20 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrls: ['./user-login-form.component.css']
 })
 export class UserLoginFormComponent {
-  loginForm;   // will be used for FormGroup instance
+  
+  loginForm = this.formBuilder.group({
+    email: this.formBuilder.control('', Validators.compose([
+      Validators.required,
+      Validators.email
+    ])),
+    password: this.formBuilder.control('', Validators.required)
+  });
 
-  constructor(private navbar:NavbarComponent, private router:Router, private formBuilder: FormBuilder, private auth:AuthService, private user:UserService) {
+  constructor(private navbar:NavbarComponent, private router:Router, private formBuilder: FormBuilder, private auth:AuthService, private user:UserService) { }
 
-  }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: this.formBuilder.control('', Validators.compose([
-        Validators.required,
-        Validators.email
-      ])),
-      password: this.formBuilder.control('', Validators.required)
-    });
-  }
-
-  get email(){
+  get email() {
     return this.loginForm.get('email')
   }
 
@@ -42,7 +39,6 @@ export class UserLoginFormComponent {
           this.user.setUser(userData);
         });
         this.router.navigate(['/']);  // redirect to home on successful login
-        this.navbar.ngOnInit();
       } else {
         window.alert(data.message);   // otherwise display error msg to user
       }

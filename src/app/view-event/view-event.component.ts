@@ -51,14 +51,12 @@ export class ViewEventComponent implements OnInit {
   }
 
   signUp() {
-    this.auth.isLoggedIn.subscribe(isLoggedIn => {
-      if (isLoggedIn) {
-        this.user.getData().subscribe(info => {
-          var email = info.email;
-          this.auth.signUp(email, this.eventId).subscribe(result => {
-            window.alert(result.message)
-            this.ngOnInit();
-          })
+    this.user.getData().subscribe(user => {
+      if (user.isLoggedIn) {
+        var email = user.email;
+        this.auth.signUp(email, this.eventId).subscribe(result => {
+          window.alert(result.message)
+          this.ngOnInit();
         });
       }
       else {

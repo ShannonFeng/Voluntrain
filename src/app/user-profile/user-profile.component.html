@@ -2,7 +2,10 @@
   <mat-card>
     <div class="row">
       <div class="col-md-6">
-        <h5><b>{{user?.name}}</b></h5>
+        <div>
+          <img class="avatar" alt="profile-picture" src="../default-pic.jpg" />
+          <h5 style="display: inline;"><b>{{user?.name}}</b></h5>
+        </div>
         <hr>
         <h6><b>Bio</b></h6>
         <p>{{user?.description}}</p>
@@ -12,6 +15,7 @@
       <div class="col-md-6">
         <div *ngIf="userEvents" class="container">
           <h6><b>Events I'm currently signed up for...</b></h6>
+          <p *ngIf="userEvents.length == 0">No events to display.</p>
           <span *ngFor="let event of userEvents">
             <li>
               <a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a>

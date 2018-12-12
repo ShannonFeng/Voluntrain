@@ -166,6 +166,24 @@ app.post('/api/event', (req, res) => {
   })
 })
 
+app.post('/api/create-event', (req, res) => {
+  var eventInfo = {
+    org_id: req.body.orgId,
+    org_name: req.body.orgName,
+    event_name: req.body.eventName,
+    description: req.body.description,
+    signUpList: [],
+    lat: 43.0733922,
+    lng: -89.4075632
+  }
+  queries.createEvent(eventInfo, (result) => {
+    res.json({ 
+      success: result.success,
+      message: result.message 
+    });
+  })
+})
+
 app.post('/api/org', (req, res) => {
   var orgId = req.body.orgId;
   queries.getOrgInfo(orgId, function(results) {

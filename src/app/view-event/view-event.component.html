@@ -3,15 +3,14 @@
     <div class="col-md-6">
       <mat-card *ngIf="event">
           <mat-card-header>
-            <div mat-card-avatar class="card-avatar"></div>
+            <div mat-card-avatar class="avatar"></div>
             <mat-card-title>{{event?.event_name}}</mat-card-title>
             <mat-card-subtitle>Organized by <a [routerLink]="['/org-profile', event.org_id]">{{event.org_name}}</a></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p><b>Description: </b>{{event.description}}</p>
             <hr/>
-            <p><b>Volunteers signed up: </b>{{event.signUpList.length}}</p>
-            <p><b>Volunteers needed: </b>15</p>
+            <p><b>Volunteers currently signed up: </b>{{event.signUpList.length}}</p>
             <hr/>
           </mat-card-content>
           <mat-card-actions style="text-align:center; padding-bottom:8px">

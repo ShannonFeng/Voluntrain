@@ -9,12 +9,12 @@
         <mat-nav-list>
           <span *ngFor="let result of results">
             <a mat-list-item [routerLink]="['/events-details', result._id]" (click)="snav.toggle()">
-              <img matListAvatar src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain">
+              <img matListAvatar src="../default-pic.jpg" alt="Voluntrain">
                   <!-- <mat-icon matListIcon>
                       <li class = "icon"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="50" height="20"></a></li>
                   </mat-icon> -->
               <h1 matLine><b style="float: left;">{{ result.event_name }}</b></h1> <br />
-              <p matLine><b style="float: left;">Organization: </b>{{ result.org_id }}</p>
+              <p matLine><b style="float: left;">Organization: </b>{{ result.org_name }}</p>
               <p matLine><b style="float: left;">Description: </b>{{ result.description }}</p>
             </a>
           </span>

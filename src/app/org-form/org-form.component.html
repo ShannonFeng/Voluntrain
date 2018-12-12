@@ -1,7 +1,7 @@
 <div class="form-group" style="text-align:center">
   <form [formGroup]="orgform" (ngSubmit)="submit()">
     <mat-card style="background-color: f2f2f2">
-      <mat-card-title>Register an Organization</mat-card-title>
+      <mat-card-title>Create an Organization</mat-card-title>
       <div class = "required">
         <mat-form-field appearance = "outline">
           <mat-label for="name">Organization Name: </mat-label>
@@ -26,11 +26,13 @@
           <textarea matInput rows="4" cols= "95" name="comment" form="usrform" formControlName="bio"></textarea>
           </mat-form-field>
       </div>
+      <!--
       <div class = "optional">
           Select images: <input type="file" name="img" multiple>
       </div>
+      -->
       <br>
-      <button type="submit" mat-raised-button color= primary>Register Organization</button>
+      <button type="submit" mat-raised-button color= primary>Create Organization</button>
     </mat-card>
   </form>
 </div>

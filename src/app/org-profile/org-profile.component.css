@@ -1,3 +1,15 @@
+.avatar {
+    /*background-image: url('../default-pic.jpg');*/
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
 .org-profile-container {
     margin-left: 50px;
     margin-right: 50px;
@@ -13,7 +25,8 @@
 .list-item {
     padding-top:10px;
     padding-bottom:10px;
-    padding-left:6px;
+    padding-left:10px;
+    padding-right:10px;
     border-radius: 5px;    /* allows for rounded corners */
     border: 1px solid;
     border-color: rgba(0, 0, 0, 0.12);
