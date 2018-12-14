@@ -23,8 +23,13 @@
       <mat-sidenav-content>
         <div>
           <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>             
-          </agm-map>
+            <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>              -->
+            <agm-marker  *ngFor="let data of markers; let i = index" [latitude]="data.lat" [longitude]="data.lng" openInfoWindow = "true" >
+             <agm-info-window>event_name</agm-info-window>
+   
+           </agm-marker>
+           
+           </agm-map>
         </div>
       </mat-sidenav-content>
     </mat-sidenav-container>

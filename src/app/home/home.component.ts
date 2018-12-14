@@ -24,7 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   email: String = "";
   zipcode: Number = 0;
   
-  results: Array<Object> = [];
+  results: Array<evnt> = [];
+  markers: marker[] = [];
 
 
   lat = 43.0746953;
@@ -34,14 +35,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   getLocation(): void{
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
+          this.markers[0] = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            label: 'You',
+          };
+          
           this.lng = position.coords.longitude;
           this.lat = position.coords.latitude;
         });
     } else {
-       this.lng =-89.3841695;
-       this.lat =43.0746953;
+      this.markers[0] = {
+       lng: -89.3841695,
+       lat: 43.0746953,
+      };
+      this.lat = 43.0746953;
+      this.lng = -89.3841695;
     }
   }
+
 
   constructor(private user:UserService, private auth:AuthService, private eventService:EventService,
               changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, ) { 
@@ -51,7 +63,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     //this.mobileQuery.addListener(this._mobileQueryListener);
     
   }
+  mapClicked() {
 
+    for(var i = 0; i <this.results.length; i++){
+      this.markers.push({
+        lat: this.results[i].lat,
+        lng: this.results[i].lng,
+        label: this.results[i].event_name,
+        
+    });
+    console.log(this.results[i].lat);
+    console.log(this.results[i].lng);
+
+    
+  }
+  }
   
   ngOnInit() {
     this.getLocation();
@@ -62,6 +88,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (input != "") {
       this.eventService.searchEvents(input).subscribe(result => {
         this.results = result;
+        this.mapClicked();
+
       });
     }
     else {
@@ -72,4 +100,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+}
+interface marker {
+	lat: number;
+	lng: number;
+	label?: String;
+}
+interface evnt {
+  _id: String;
+  event_name: String;
+  description: String;
+  signUpList: String[];
+  lat: number;
+  lng: number;
 }
