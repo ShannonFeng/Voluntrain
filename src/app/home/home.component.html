@@ -3,7 +3,8 @@
     <input (keyup)="searchEvents($event); snav.open();" matInput placeholder="Search for volunteer events...">
   </mat-form-field>
 </div>
-  <mat-card class="container-fluid">
+<div class="home-container">
+  <mat-card>
     <mat-sidenav-container class="example-sidenav-container" >
       <mat-sidenav #snav style="width: 35%; background-color: rgba(255, 255, 255, 0.842); " class="event-side">
         <mat-nav-list>
@@ -34,3 +35,4 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
   </mat-card>
+</div>

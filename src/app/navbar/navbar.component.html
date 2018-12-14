@@ -11,9 +11,14 @@
     </ul>
 </div>
 -->
+<!--awesome toolbar-->
+<mat-toolbar class="navbar" style="background-image:linear-gradient(to bottom right, rgb(250, 83, 200), rgba(77, 127, 219, 0.788), white);">
+
+<!--not as awesome toolbar
 <mat-toolbar class="navbar" color="primary">
+    -->
     <mat-toolbar-row>
-        <span style="margin-right:10px"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="119" height="45"></a></span>
+        <span style="margin-right:10px"><a routerLink="/"><img src="https://i.imgur.com/Qx9v3ve.png" alt="Voluntrain" width="160" height="45"></a></span>
         <button class="navbar-btn" routerLink="/" mat-raised-button color="accent">Home</button>  
         <span class="spacer"></span>
         <button class="navbar-btn" routerLink="/create-account" *ngIf="!(isLoggedIn$ | async)" mat-raised-button color="accent">Create Account</button>  
