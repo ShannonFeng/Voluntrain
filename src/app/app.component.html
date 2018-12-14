@@ -1,4 +1,14 @@
-<div style="text-align:center">
-  <app-navbar></app-navbar>
-  <router-outlet></router-outlet>
+<div class="page-wrap">
+  <header role="banner">
+    <app-navbar></app-navbar>
+  </header>
+  <main class="content">
+      <router-outlet></router-outlet>
+  </main>
+  <!--Footer:-->
+  <mat-toolbar style="margin-top:30px" color="primary">
+    <div class="container" style="text-align:center">
+      <span style="font-size:14px">Voluntrain © 2018</span>
+    </div>
+  </mat-toolbar>
 </div>

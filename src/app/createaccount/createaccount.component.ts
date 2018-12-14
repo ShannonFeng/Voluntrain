@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-createaccount',
@@ -13,7 +14,7 @@ export class CreateaccountComponent implements OnInit {
 
   ngOnInit() {}
 
-  constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router) {
+  constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router, private app:AppComponent) {
     this.signupForm = formBuilder.group({
       name: formBuilder.control('', Validators.compose([
         Validators.required,
@@ -39,12 +40,17 @@ export class CreateaccountComponent implements OnInit {
     var zipcode = this.signupForm.value.zipcode;
     var password = this.signupForm.value.password;
     var description = this.signupForm.value.description;
-    var interests = this.signupForm.value.description;
+    var interests = this.signupForm.value.interests;
 
     this.auth.createAccount(name, email, zipcode, password, description, interests).subscribe(data => {
       if (data.success) {
-        window.alert(data.message);   // notify user that account creation successful
-        this.router.navigate(['/']);  // redirect to home
+        // notify user that account creation successful
+        window.alert(data.message);
+        // then log the user in
+        this.auth.login(email, password).subscribe(done => {
+            this.app.ngOnInit();          // re-initilize to show that user is logged in
+            this.router.navigate(['/']);  // redirect to home
+        })
       } else {
         window.alert(data.message);   // otherwise display error msg to user
       }

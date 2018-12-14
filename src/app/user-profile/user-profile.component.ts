@@ -9,12 +9,22 @@ import { UserService } from '../user.service';
 export class UserProfileComponent implements OnInit {
 
   user;
+  userEvents;
+  userOrgs;
 
   constructor(private userService:UserService) { }
 
   ngOnInit() {
     this.userService.getData().subscribe(info => {
       this.user = info;
+      if (this.user.isOrgAdmin) {
+        this.userService.getUserOrgs().subscribe(orgs => {
+          this.userOrgs = orgs;
+        })
+      }
     });
+    this.userService.getEventsSignedUp().subscribe(events => {
+      this.userEvents = events;
+    })
   }
 }

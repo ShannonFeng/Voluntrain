@@ -1,3 +1,26 @@
+.create-event-container {
+    display: flex;
+    flex-direction: column;
+    margin-top:20px;
+}
+
+.create-event-container > * {
+    width: 100%;
+}
+
+.muted-text {
+    font-size:11px;
+    color:grey;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.footer-content {
+    text-align:center;
+    padding-top:20px;
+}
+
+/*
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -40,3 +63,4 @@ div {
     width: 70%;
     margin: 0 auto;
 }
+*/

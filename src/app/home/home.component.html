@@ -1,42 +1,31 @@
-<!-- Load icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div class="searchBar">
-  <mat-form-field style="width: 70%" >
+<div class="searchBar container">
+  <mat-form-field style="width:100%" >
     <input (keyup)="searchEvents($event); snav.open();" matInput placeholder="Search for volunteer events...">
-  </mat-form-field>    
-  <mat-sidenav-container class="example-sidenav-container" >
-    <mat-sidenav #snav style="width: 35%; background-color: rgba(255, 255, 255, 0.842); " class="event-side">
-      <mat-nav-list>
-        <span *ngFor="let result of results">
-          <a mat-list-item [routerLink]="['/events-details', result._id]" (click)="snav.toggle()">
-            <img matListAvatar src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain">
-                <!-- <mat-icon matListIcon>
-                    <li class = "icon"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="50" height="20"></a></li>
-                </mat-icon> -->
-            <h1 matLine><b style="float: left;">{{ result.event_name }}</b></h1> <br />
-            <p matLine><b style="float: left;">Organization: </b>{{ result.org_id }}</p>
-            <p matLine><b style="float: left;">Description: </b>{{ result.description }}</p>
-          </a>
-        </span>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div>
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
-         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>             
-        </agm-map>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  </mat-form-field>
 </div>
-
-<div *ngIf="!isLoggedIn">
-  <p>No user is currently logged in.</p>
-</div>
-
-<div *ngIf="isLoggedIn">
-  <p>Currently logged in user: {{ name }}</p>
-  <p>Email: {{ email }}</p>
-  <p>Zipcode: {{ zipcode }}</p>
-</div>
+  <mat-card class="container-fluid">
+    <mat-sidenav-container class="example-sidenav-container" >
+      <mat-sidenav #snav style="width: 35%; background-color: rgba(255, 255, 255, 0.842); " class="event-side">
+        <mat-nav-list>
+          <span *ngFor="let result of results">
+            <a mat-list-item [routerLink]="['/events-details', result._id]" (click)="snav.toggle()">
+              <img matListAvatar src="../default-pic.jpg" alt="Voluntrain">
+                  <!-- <mat-icon matListIcon>
+                      <li class = "icon"><a routerLink="/"><img src="https://i.imgur.com/pY7oNOa.png" alt="Voluntrain" width="50" height="20"></a></li>
+                  </mat-icon> -->
+              <h1 matLine><b style="float: left;">{{ result.event_name }}</b></h1> <br />
+              <p matLine><b style="float: left;">Organization: </b>{{ result.org_name }}</p>
+              <p matLine><b style="float: left;">Description: </b>{{ result.description }}</p>
+            </a>
+          </span>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "zoom">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>             
+          </agm-map>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </mat-card>

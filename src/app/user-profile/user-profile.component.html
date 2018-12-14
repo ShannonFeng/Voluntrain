@@ -1,22 +1,37 @@
-<div>
-  <div class="username">
-    <label><b>Name:</b> {{user?.name}} </label>
-    <!--<i class="fas fa-edit"></i>-->
-  </div>
-
-  <div #description class="bio">
-    <label><b>Email:</b> {{user?.email}} </label>
-    <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
-  </div>
-
-  <div #zipcode class="zipcode">
-    <label><b>Zipcode:</b> {{user?.zipcode}} </label>
-    <!--<i (click)="testFunction()" class="fas fa-edit"></i>-->
-  </div>
-
-<!--
-  <div class = "events" contenteditable="true">
-   <p><b>Events signed up for:</b> <i class="fas fa-edit"></i></p>                   
-  </div>
--->
+<div class="container profile-box">
+  <mat-card>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <img class="avatar" alt="profile-picture" src="../default-pic.jpg" />
+          <h5 style="display: inline;"><b>{{user?.name}}</b></h5>
+        </div>
+        <hr>
+        <h6><b>Bio</b></h6>
+        <p>{{user?.description}}</p>
+        <h6><b>Interests</b></h6>
+        <p>{{user?.interests}}</p>
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="userEvents" class="container">
+          <h6><b>Events I'm currently signed up for...</b></h6>
+          <p *ngIf="userEvents.length == 0">No events to display.</p>
+          <span *ngFor="let event of userEvents">
+            <li>
+              <a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a>
+            </li>
+          </span>
+        </div>
+        <div *ngIf="user?.isOrgAdmin" class="container">
+          <hr>
+          <h6><b>My Organizations:</b></h6>
+          <span *ngFor="let org of userOrgs">
+            <li>
+                <a [routerLink]="['/org-profile', org._id]">{{ org.name }}</a>
+            </li>
+          </span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
 </div>

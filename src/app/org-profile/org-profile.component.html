@@ -1,0 +1,100 @@
+<div class="org-profile-container">
+  <mat-card *ngIf="org && org_events">
+    <div fxLayout="row" fxLayoutGap="15px">
+      <div fxLayout="column" fxFlex="50%">
+          <div fxLayout="row">
+            <div fxLayout="column">
+              <img class="avatar" src="../default-pic.jpg"/>
+            </div>
+            <div fxLayout="column">
+              <h5>{{ org.name }}</h5>
+            </div>
+          </div>
+          <hr/>
+          <div>
+            <h6><b>About</b></h6>
+            <mat-icon>description</mat-icon><span class="icon-aligned">{{ org.bio }}</span>
+            <hr/>
+          </div>
+          <div>
+            <h6><b>Location</b></h6>
+            <mat-icon>place</mat-icon><span class="icon-aligned">{{ org.location }}</span>
+            <hr/>
+          </div>
+          <div>
+            <h6><b>Primary Contact</b></h6>
+            <mat-icon>phone</mat-icon><span class="icon-aligned">{{ org.admin }}</span>
+          </div>
+      </div>
+      <div fxLayout="column" fxFlex="50%">
+        <span style="display:flex;">
+          <h5 style="display:inline">Current Events</h5>
+          <span class="spacer"></span>
+          <button style="display:inline" *ngIf="userIsOrgAdmin" [routerLink]="['/create-event', org._id, org.name]" mat-raised-button color="accent">Create a new event</button>
+        </span>
+        <div>
+          <p *ngIf="org_events.length == 0">No events happening at the moment.</p>
+          <mat-list>
+            <span *ngFor="let event of org_events">
+              <div class="list-item">
+                <h6><a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a></h6>
+                <p><b>Description: </b>{{ event.description }}</p>
+              </div>
+            </span>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<!--
+<div class="org-profile-container">
+  <mat-card *ngIf="org && org_events">
+    <mat-card-title>{{ org.name }}</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-grid-list cols="3">
+        <mat-grid-tile [colspan]="1">
+          <div class="grid-content">
+            <div>
+              <h6><b>About</b></h6>
+              <mat-icon>description</mat-icon><span class="icon-aligned">{{ org.bio }}</span>
+              <hr/>
+            </div>
+            <div>
+              <h6><b>Location</b></h6>
+              <mat-icon>place</mat-icon><span class="icon-aligned">{{ org.location }}</span>
+              <hr/>
+            </div>
+            <div>
+              <h6><b>Primary Contact</b></h6>
+              <mat-icon>phone</mat-icon><span class="icon-aligned">{{ org.admin }}</span>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+          <div class="grid-content">
+            <span style="display:flex;">
+              <h6 style="display:inline"><b>Current Events</b></h6>
+              <span class="spacer"></span>
+              <button style="display:inline" *ngIf="userIsOrgAdmin" [routerLink]="['/create-event', org._id, org.name]" mat-raised-button color="accent">Create a new event</button>
+            </span>
+            <div>
+              <p *ngIf="org_events.length == 0">No events happening at the moment.</p>
+              <mat-list>
+                <span *ngFor="let event of org_events">
+                  <div class="list-item">
+                    <h6><a [routerLink]="['/events-details', event._id]">{{ event.event_name }}</a></h6>
+                    <p><b>Description: </b>{{ event.description }}</p>
+                  </div>
+                </span>
+              </mat-list>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+-->

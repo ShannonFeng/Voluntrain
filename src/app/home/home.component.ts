@@ -55,22 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.getLocation();
-    this.user.getData().subscribe(data => {
-      if(data.isLoggedIn) {
-        this.auth.setLoggedIn(true);
-        this.isLoggedIn = true;
-        this.name = data.name;
-        this.email = data.email;
-        this.zipcode = data.zipcode;
-        console.log(this.name + " is currently logged in.");
-      } 
-      else {
-        this.auth.setLoggedIn(false);
-        this.isLoggedIn = false;
-        console.log("No user is currently logged in.");
-      }
-    })
-    
   }
    
   searchEvents(event: any) {
@@ -83,7 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     else {
       this.results = [];
     }
-    
   }
 
   ngOnDestroy(): void {

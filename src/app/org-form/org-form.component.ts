@@ -31,9 +31,12 @@ ngOnInit() { }
 
     this.Auth.createOrg(name, location, zipcode, bio).subscribe(data => {
       if (data.success) {
+        window.alert(data.message);
         this.router.navigate(['/']);  // redirect to home
       }
-      window.alert(data.message);
+      else {
+        window.alert(data.message);
+      }
     })
   }
 

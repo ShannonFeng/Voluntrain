@@ -1,5 +1,18 @@
+agm-map {
+    border-radius: 5px;
+    height: 500px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+}
 
-
+.avatar {
+    /*background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');*/
+    background-image: url('../default-pic.jpg');
+    background-size: cover;
+    display: inline;
+}
+/*
 #testid {display: block;
     color: rgb(12, 1, 1);
     background-color: #f2f2f2;
@@ -96,3 +109,4 @@ h1{
         border-radius: 4px;
         cursor: pointer;
     }
+    */
